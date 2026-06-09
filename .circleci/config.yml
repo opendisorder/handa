@@ -1,17 +1,13 @@
 version: 2.1
 
 orbs:
-  flutter: circleci/flutter@2.0.0
-
-executors:
-  flutter-linux:
-    machine:
-      image: ubuntu-2004:2024.01.1
-    resource_class: medium
+  flutter: circleci/flutter@2.1.0
 
 jobs:
   build-apk:
-    executor: flutter-linux
+    docker:
+      - image: cimg/android:2024.12.1
+    resource_class: medium
     steps:
       - checkout
       - flutter/install_sdk_and_pub:
