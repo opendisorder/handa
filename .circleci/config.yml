@@ -1,14 +1,61 @@
 version: 2.1
 
+orbs:
+  flutter: circleci/flutter@2.1.0
+
 jobs:
-  test:
+  build-apk:
     docker:
       - image: cimg/base:stable
     resource_class: medium
+    environment:
+      ANDROID_HOME: /home/circleci/android-sdk
+      ANDROID_SDK_ROOT: /home/circleci/android-sdk
+      CMDLINE_TOOLS: /home/circleci/android-sdk/cmdline-tools/latest
+      JAVA_HOME: /usr/lib/jvm/java-17-openjdk-amd64
     steps:
-      - run: echo "Hello from CircleCI!" && uname -a
+      - checkout
+
+      - run:
+          name: Install Java & tools
+          command: sudo apt-get update -qq && sudo apt-get install -y -qq openjdk-17-jdk xz-utils
+
+      - run:
+          name: Install Android SDK
+          command: |
+            mkdir -p $ANDROID_HOME/cmdline-tools
+            curl -sSL https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -o cmdline-tools.zip
+            unzip -q cmdline-tools.zip -d $ANDROID_HOME/cmdline-tools
+            mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+            rm cmdline-tools.zip
+            yes | $CMDLINE_TOOLS/bin/sdkmanager --sdk_root=$ANDROID_HOME "platform-tools" "platforms;android-34" "build-tools;34.0.0" > /dev/null
+
+      - run: |
+          echo 'export ANDROID_HOME=$ANDROID_HOME' >> $BASH_ENV
+          echo 'export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin' >> $BASH_ENV
+
+      - flutter/install_sdk_and_pub:
+          version: "3.29.2"
+
+      - run: |
+          yes | $CMDLINE_TOOLS/bin/sdkmanager --sdk_root=$ANDROID_HOME --licenses > /dev/null 2>&1 || true
+
+      - run:
+          name: Build Runner
+          command: dart run build_runner build --delete-conflicting-outputs
+
+      - run:
+          name: Build APK
+          command: flutter build apk --debug --target-platform android-arm64
+
+      - store_artifacts:
+          path: build/app/outputs/flutter-apk/
+          destination: handa-apk
 
 workflows:
   build:
     jobs:
-      - test
+      - build-apk:
+          filters:
+            branches:
+              only: main
