@@ -1,0 +1,29 @@
+version: 2.1
+
+orbs:
+  flutter: circleci/flutter@2.0.0
+
+jobs:
+  build-apk:
+    executor:
+      name: flutter/default
+      tag: "3.29.2"
+    steps:
+      - checkout
+      - flutter/install_sdk:
+          version: "3.29.2"
+      - run: flutter pub get
+      - run: dart run build_runner build --delete-conflicting-outputs
+      - run: flutter build apk --debug --target-platform android-arm64
+      - store_artifacts:
+          path: build/app/outputs/flutter-apk/
+          destination: handa-apk
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build-apk:
+          filters:
+            branches:
+              only: main
