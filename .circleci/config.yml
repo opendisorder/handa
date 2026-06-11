@@ -29,8 +29,10 @@ jobs:
           name: Configure Flutter
           command: |
             export PATH="/opt/flutter/bin:/opt/flutter/bin/cache/dart-sdk/bin:$PATH"
+            git config --global --add safe.directory /opt/flutter
+            git config --global --add safe.directory /opt/flutter/bin/cache/dart-sdk
             flutter config --no-analytics
-            flutter doctor
+            flutter doctor -v
 
       - run:
           name: Install dependencies
