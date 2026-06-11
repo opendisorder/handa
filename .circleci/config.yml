@@ -4,7 +4,7 @@ jobs:
   build-apk:
     machine:
       image: ubuntu-2204:2024.01.1
-    resource_class: medium
+    resource_class: medium+
     steps:
       - checkout
 
@@ -16,14 +16,28 @@ jobs:
             java -version
 
       - run:
+          name: Install Android SDK
+          command: |
+            export ANDROID_HOME="$HOME/android-sdk"
+            export ANDROID_SDK_ROOT="$ANDROID_HOME"
+            mkdir -p $ANDROID_HOME/cmdline-tools
+            curl -sSL https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -o cmdline-tools.zip
+            unzip -q cmdline-tools.zip -d $ANDROID_HOME/cmdline-tools
+            mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+            rm cmdline-tools.zip
+            yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_HOME --licenses > /dev/null 2>&1 || true
+            $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_HOME "platform-tools" "platforms;android-34" "build-tools;34.0.0"
+            echo 'export ANDROID_HOME="$HOME/android-sdk"' >> $BASH_ENV
+            echo 'export ANDROID_SDK_ROOT="$HOME/android-sdk"' >> $BASH_ENV
+            echo 'export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"' >> $BASH_ENV
+
+      - run:
           name: Install Flutter
           command: |
             curl -sSLO https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.44.1-stable.tar.xz
             tar xf flutter_linux_3.44.1-stable.tar.xz -C ~/
             rm flutter_linux_3.44.1-stable.tar.xz
             echo 'export PATH="$HOME/flutter/bin:$HOME/flutter/bin/cache/dart-sdk/bin:$PATH"' >> $BASH_ENV
-            echo 'export ANDROID_HOME="$HOME/android-sdk"' >> $BASH_ENV
-            echo 'export ANDROID_SDK_ROOT="$HOME/android-sdk"' >> $BASH_ENV
 
       - run:
           name: Configure Flutter
