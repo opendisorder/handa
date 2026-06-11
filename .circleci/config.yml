@@ -46,7 +46,7 @@ jobs:
           name: Run flutter analyze
           command: |
             export PATH="$HOME/flutter/bin:$HOME/flutter/bin/cache/dart-sdk/bin:$PATH"
-            flutter analyze --no-fatal-warnings --no-fatal-infos --enable-experiment=null-aware-elements
+            flutter analyze --no-fatal-warnings --no-fatal-infos
 
       - run:
           name: Build debug APK
