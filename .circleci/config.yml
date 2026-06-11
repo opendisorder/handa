@@ -52,7 +52,7 @@ jobs:
           name: Build debug APK
           command: |
             export PATH="$HOME/flutter/bin:$HOME/flutter/bin/cache/dart-sdk/bin:$PATH"
-            flutter build apk --debug --target-platform android-arm64
+            flutter build apk --debug --target-platform android-arm64 --android-skip-build-dependency-validation
 
       - store_artifacts:
           path: build/app/outputs/flutter-apk/
