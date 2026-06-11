@@ -52,7 +52,7 @@ jobs:
           name: Build debug APK
           command: |
             export PATH="$HOME/flutter/bin:$HOME/flutter/bin/cache/dart-sdk/bin:$PATH"
-            flutter build apk --debug --target-platform android-arm64 --enable-experiment=null-aware-elements
+            flutter build apk --debug --target-platform android-arm64
 
       - store_artifacts:
           path: build/app/outputs/flutter-apk/
