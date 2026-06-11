@@ -12,6 +12,8 @@ linter:
     - avoid_unnecessary_containers
 
 analyzer:
+  enable-experiment:
+    - null-aware-elements
   errors:
     invalid_annotation_target: ignore
   exclude:
