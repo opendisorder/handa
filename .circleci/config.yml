@@ -19,39 +19,39 @@ jobs:
           name: Install Flutter
           command: |
             curl -sSLO https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.44.1-stable.tar.xz
-            sudo tar xf flutter_linux_3.44.1-stable.tar.xz -C /opt/
+            tar xf flutter_linux_3.44.1-stable.tar.xz -C ~/
             rm flutter_linux_3.44.1-stable.tar.xz
-            echo 'export PATH="/opt/flutter/bin:/opt/flutter/bin/cache/dart-sdk/bin:$PATH"' >> $BASH_ENV
+            echo 'export PATH="$HOME/flutter/bin:$HOME/flutter/bin/cache/dart-sdk/bin:$PATH"' >> $BASH_ENV
 
       - run:
           name: Configure Flutter
           command: |
-            export PATH="/opt/flutter/bin:/opt/flutter/bin/cache/dart-sdk/bin:$PATH"
+            export PATH="$HOME/flutter/bin:$HOME/flutter/bin/cache/dart-sdk/bin:$PATH"
             flutter config --no-analytics
             flutter doctor -v
 
       - run:
           name: Install dependencies
           command: |
-            export PATH="/opt/flutter/bin:/opt/flutter/bin/cache/dart-sdk/bin:$PATH"
+            export PATH="$HOME/flutter/bin:$HOME/flutter/bin/cache/dart-sdk/bin:$PATH"
             flutter pub get
 
       - run:
           name: Generate Drift code
           command: |
-            export PATH="/opt/flutter/bin:/opt/flutter/bin/cache/dart-sdk/bin:$PATH"
+            export PATH="$HOME/flutter/bin:$HOME/flutter/bin/cache/dart-sdk/bin:$PATH"
             dart run build_runner build --delete-conflicting-outputs || true
 
       - run:
           name: Run flutter analyze
           command: |
-            export PATH="/opt/flutter/bin:/opt/flutter/bin/cache/dart-sdk/bin:$PATH"
+            export PATH="$HOME/flutter/bin:$HOME/flutter/bin/cache/dart-sdk/bin:$PATH"
             flutter analyze --no-fatal-warnings --no-fatal-infos
 
       - run:
           name: Build debug APK
           command: |
-            export PATH="/opt/flutter/bin:/opt/flutter/bin/cache/dart-sdk/bin:$PATH"
+            export PATH="$HOME/flutter/bin:$HOME/flutter/bin/cache/dart-sdk/bin:$PATH"
             flutter build apk --debug --target-platform android-arm64
 
       - store_artifacts:
