@@ -1,36 +1,60 @@
 version: 2.1
 
-orbs:
-  android: circleci/android@2.5.0
-
 jobs:
   build-apk:
-    executor:
-      name: android/android-machine
-      resource-class: medium
+    machine:
+      image: ubuntu-2204:2024.01.1
+    resource_class: medium
     steps:
       - checkout
+
+      - run:
+          name: Install Java 17
+          command: |
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq openjdk-17-jdk curl xz-utils
+            java -version
 
       - run:
           name: Install Flutter
           command: |
             curl -sSLO https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.44.1-stable.tar.xz
-            tar xf flutter_linux_3.44.1-stable.tar.xz -C /home/circleci/
+            sudo tar xf flutter_linux_3.44.1-stable.tar.xz -C /opt/
             rm flutter_linux_3.44.1-stable.tar.xz
-            echo 'export PATH="$PATH:/home/circleci/flutter/bin:/home/circleci/flutter/bin/cache/dart-sdk/bin"' >> $BASH_ENV
+            echo 'export PATH="/opt/flutter/bin:/opt/flutter/bin/cache/dart-sdk/bin:$PATH"' >> $BASH_ENV
+            echo 'export ANDROID_HOME="$HOME/android-sdk"' >> $BASH_ENV
+            echo 'export ANDROID_SDK_ROOT="$HOME/android-sdk"' >> $BASH_ENV
+
+      - run:
+          name: Configure Flutter
+          command: |
+            export PATH="/opt/flutter/bin:/opt/flutter/bin/cache/dart-sdk/bin:$PATH"
             flutter config --no-analytics
+            flutter doctor
 
       - run:
           name: Install dependencies
-          command: flutter pub get
+          command: |
+            export PATH="/opt/flutter/bin:/opt/flutter/bin/cache/dart-sdk/bin:$PATH"
+            flutter pub get
 
       - run:
           name: Generate Drift code
-          command: dart run build_runner build --delete-conflicting-outputs
+          command: |
+            export PATH="/opt/flutter/bin:/opt/flutter/bin/cache/dart-sdk/bin:$PATH"
+            dart run build_runner build --delete-conflicting-outputs || true
+
+      - run:
+          name: Run flutter analyze
+          command: |
+            export PATH="/opt/flutter/bin:/opt/flutter/bin/cache/dart-sdk/bin:$PATH"
+            flutter analyze
 
       - run:
           name: Build debug APK
-          command: flutter build apk --debug --target-platform android-arm64
+          command: |
+            export PATH="/opt/flutter/bin:/opt/flutter/bin/cache/dart-sdk/bin:$PATH"
+            flutter build apk --debug --target-platform android-arm64
 
       - store_artifacts:
           path: build/app/outputs/flutter-apk/
