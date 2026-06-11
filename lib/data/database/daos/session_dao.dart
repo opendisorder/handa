@@ -9,43 +9,34 @@ class SessionDao extends DatabaseAccessor<HandaDatabase>
     with _$SessionDaoMixin {
   SessionDao(super.db);
 
-  /// Get all sessions ordered by most recent first.
   Future<List<Session>> getAll() =>
-      (select(sessions)..addOrderBy(OrderingTerm.desc(sessions.startedAt)))
-          .get();
+      (select(sessions)..orderBy([(t) => OrderingTerm.desc(t.startedAt)])).get();
 
-  /// Get a single session by ID.
   Future<Session?> getById(int id) =>
       (select(sessions)..where((t) => t.id.equals(id))).getSingleOrNull();
 
-  /// Get sessions by type.
   Future<List<Session>> getByType(String type) =>
       (select(sessions)
             ..where((t) => t.type.equals(type))
-            ..addOrderBy(OrderingTerm.desc(sessions.startedAt)))
+            ..orderBy([(t) => OrderingTerm.desc(t.startedAt)]))
           .get();
 
-  /// Get the most recent session.
   Future<Session?> getLatest() =>
-      (select(sessions)..addOrderBy(OrderingTerm.desc(sessions.startedAt)))
+      (select(sessions)..orderBy([(t) => OrderingTerm.desc(t.startedAt)]))
           .getSingleOrNull();
 
-  /// Get sessions within a date range.
   Future<List<Session>> getByDateRange(DateTime start, DateTime end) =>
       (select(sessions)
             ..where((t) => t.startedAt.isBetweenValues(start, end))
-            ..addOrderBy(OrderingTerm.desc(sessions.startedAt)))
+            ..orderBy([(t) => OrderingTerm.desc(t.startedAt)]))
           .get();
 
-  /// Insert a new session, returning the ID.
   Future<int> insert(SessionsCompanion entry) =>
       into(sessions).insert(entry);
 
-  /// Update session (e.g., set completedAt and score).
-  Future<bool> update(SessionsCompanion entry) =>
+  Future<bool> updateItem(SessionsCompanion entry) =>
       update(sessions).replace(entry);
 
-  /// Mark session as completed with final score.
   Future<int> completeSession(
     int sessionId,
     double averageScore,
@@ -59,7 +50,6 @@ class SessionDao extends DatabaseAccessor<HandaDatabase>
         ),
       );
 
-  /// Get average score across all completed sessions.
   Future<double?> getOverallAverage() =>
       ((select(sessions)
                 ..where((t) => t.completedAt.isNotNull())
@@ -71,14 +61,12 @@ class SessionDao extends DatabaseAccessor<HandaDatabase>
         return scores.fold<double>(0, (a, b) => a + b!) / scores.length;
       });
 
-  /// Count total sessions.
   Future<int> count() =>
       select(sessions).map((_) => 1).get().then((r) => r.length);
 
-  /// Count sessions in last N days.
   Future<int> countRecent(int days) {
     final cutoff = DateTime.now().subtract(Duration(days: days));
-    return       (select(sessions)..where((t) => t.startedAt.isBiggerThanValue(cutoff)))
+    return (select(sessions)..where((t) => t.startedAt.isBiggerThanValue(cutoff)))
         .map((_) => 1)
         .get()
         .then((r) => r.length);

@@ -9,32 +9,27 @@ class LiveConversationDao extends DatabaseAccessor<HandaDatabase>
     with _$LiveConversationDaoMixin {
   LiveConversationDao(super.db);
 
-  /// Get all conversations for a session.
   Future<List<LiveConversation>> getBySession(int sessionId) =>
       (select(liveConversations)
             ..where((t) => t.sessionId.equals(sessionId))
-            ..addOrderBy(OrderingTerm.asc(liveConversations.createdAt)))
+            ..orderBy([(t) => OrderingTerm.asc(t.createdAt)]))
           .get();
 
-  /// Get conversations by exercise type.
   Future<List<LiveConversation>> getByType(String exerciseType) =>
       (select(liveConversations)
             ..where((t) => t.exerciseType.equals(exerciseType))
-            ..addOrderBy(OrderingTerm.desc(liveConversations.createdAt)))
+            ..orderBy([(t) => OrderingTerm.desc(t.createdAt)]))
           .get();
 
-  /// Get recent conversation records.
   Future<List<LiveConversation>> getRecent(int limit) =>
       (select(liveConversations)
-            ..addOrderBy(OrderingTerm.desc(liveConversations.createdAt))
+            ..orderBy([(t) => OrderingTerm.desc(t.createdAt)])
             ..limit(limit))
           .get();
 
-  /// Insert a new conversation record.
   Future<int> insert(LiveConversationsCompanion entry) =>
       into(liveConversations).insert(entry);
 
-  /// Update an existing record.
-  Future<bool> update(LiveConversationsCompanion entry) =>
+  Future<bool> updateItem(LiveConversationsCompanion entry) =>
       update(liveConversations).replace(entry);
 }

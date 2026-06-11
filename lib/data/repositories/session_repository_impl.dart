@@ -4,15 +4,12 @@ import '../../../domain/models/live_conversation.dart';
 import '../../../domain/models/progress_stats.dart';
 import '../../../domain/models/session.dart';
 import '../../../domain/repositories/session_repository.dart';
-import '../../database/handa_database.dart';
+import '../database/handa_database.dart' as db;
 
-/// Drift-backed implementation of SessionRepository.
 class SessionRepositoryImpl implements SessionRepository {
-  final HandaDatabase _db;
+  final db.HandaDatabase _db;
 
   SessionRepositoryImpl(this._db);
-
-  // ─── Sessions ───────────────────────────────────────────────
 
   @override
   Future<int> createSession({
@@ -20,7 +17,7 @@ class SessionRepositoryImpl implements SessionRepository {
     int totalExercises = 0,
   }) async {
     return await _db.sessionDao.insert(
-      SessionsCompanion(
+      db.SessionsCompanion(
         type: Value(type),
         totalExercises: Value(totalExercises),
       ),
@@ -55,12 +52,9 @@ class SessionRepositoryImpl implements SessionRepository {
   @override
   Future<List<Session>> getRecentSessions({int days = 30}) async {
     final start = DateTime.now().subtract(Duration(days: days));
-    final rows =
-        await _db.sessionDao.getByDateRange(start, DateTime.now());
+    final rows = await _db.sessionDao.getByDateRange(start, DateTime.now());
     return rows.map(_toSession).toList();
   }
-
-  // ─── Attempts ───────────────────────────────────────────────
 
   @override
   Future<int> saveAttempt({
@@ -74,7 +68,7 @@ class SessionRepositoryImpl implements SessionRepository {
     bool isOffline = false,
   }) async {
     return await _db.attemptDao.insert(
-      AttemptsCompanion(
+      db.AttemptsCompanion(
         sessionId: Value(sessionId),
         exerciseId: Value(exerciseId),
         userResponse: Value(userResponse),
@@ -99,8 +93,6 @@ class SessionRepositoryImpl implements SessionRepository {
     return row != null ? _toAttempt(row) : null;
   }
 
-  // ─── Live Conversations ─────────────────────────────────────
-
   @override
   Future<int> saveConversation({
     required int sessionId,
@@ -111,7 +103,7 @@ class SessionRepositoryImpl implements SessionRepository {
     double? score,
   }) async {
     return await _db.liveConversationDao.insert(
-      LiveConversationsCompanion(
+      db.LiveConversationsCompanion(
         sessionId: Value(sessionId),
         exerciseType: Value(exerciseType),
         durationSeconds: Value(durationSeconds),
@@ -122,41 +114,31 @@ class SessionRepositoryImpl implements SessionRepository {
     );
   }
 
-  // ─── Progress ───────────────────────────────────────────────
-
   @override
   Future<ProgressStats> getProgressStats() async {
     final sessions = await _db.sessionDao.getAll();
-    final completedSessions =
-        sessions.where((s) => s.completedAt != null).toList();
+    final completedSessions = sessions.where((s) => s.completedAt != null).toList();
 
     final allAttempts = await _db.attemptDao.getRecent(10000);
     final overallAvg = await _db.sessionDao.getOverallAverage();
 
-    // Count sessions this week
     final weekAgo = DateTime.now().subtract(const Duration(days: 7));
-    final sessionsThisWeek =
-        completedSessions.where((s) => s.startedAt.isAfter(weekAgo)).length;
+    final sessionsThisWeek = completedSessions.where((s) => s.startedAt.isAfter(weekAgo)).length;
 
-    // Count attempts by score level
     final Map<String, int> byLevel = {};
     for (final a in allAttempts) {
       byLevel[a.scoreLevel] = (byLevel[a.scoreLevel] ?? 0) + 1;
     }
 
-    // Get last 30 scores for chart
     final scoreHistory = completedSessions
         .where((s) => s.averageScore != null)
         .map((s) => s.averageScore!)
         .toList();
-    // Trim to last 30
     if (scoreHistory.length > 30) {
       scoreHistory.removeRange(0, scoreHistory.length - 30);
     }
 
-    // Get breathing days
-    final breathingDaysStr =
-        await _db.settingsDao.get('breathing_days_completed');
+    final breathingDaysStr = await _db.settingsDao.get('breathing_days_completed');
     final breathingDays = int.tryParse(breathingDaysStr ?? '0') ?? 0;
 
     return ProgressStats(
@@ -168,44 +150,45 @@ class SessionRepositoryImpl implements SessionRepository {
       attemptsByLevel: byLevel,
       recentSessions: completedSessions.reversed
           .take(10)
-          .map(_toSession)
+          .map((s) => Session(
+                id: s.id,
+                startedAt: s.startedAt,
+                completedAt: s.completedAt,
+                type: s.type,
+                totalExercises: s.totalExercises,
+                completedExercises: s.completedExercises,
+                averageScore: s.averageScore,
+                isSynced: s.isSynced,
+              ))
           .toList(),
       scoreHistory: scoreHistory,
       breathingDaysCompleted: breathingDays,
     );
   }
 
-  // ─── Private Helpers ────────────────────────────────────────
-
-  int _calculateStreak(List<DataSession> sessions) {
+  int _calculateStreak(List<db.Session> sessions) {
     if (sessions.isEmpty) return 0;
-
-    final sorted = List<DataSession>.from(sessions)
+    final sorted = List<db.Session>.from(sessions)
       ..sort((a, b) => b.startedAt.compareTo(a.startedAt));
 
     int streak = 0;
     final today = DateTime.now();
-
     for (int i = 0; i < sorted.length; i++) {
       final expectedDate = today.subtract(Duration(days: i));
       final sessionDate = sorted[i].startedAt;
-
       if (sessionDate.year == expectedDate.year &&
           sessionDate.month == expectedDate.month &&
           sessionDate.day == expectedDate.day) {
         streak++;
       } else if (sessionDate.isBefore(
           DateTime(expectedDate.year, expectedDate.month, expectedDate.day))) {
-        break; // Streak broken
+        break;
       }
     }
-
     return streak;
   }
 
-  // ─── Mappers ────────────────────────────────────────────────
-
-  Session _toSession(DataSession row) => Session(
+  Session _toSession(db.Session row) => Session(
         id: row.id,
         startedAt: row.startedAt,
         completedAt: row.completedAt,
@@ -216,7 +199,7 @@ class SessionRepositoryImpl implements SessionRepository {
         isSynced: row.isSynced,
       );
 
-  Attempt _toAttempt(DataAttempt row) => Attempt(
+  Attempt _toAttempt(db.Attempt row) => Attempt(
         id: row.id,
         sessionId: row.sessionId,
         exerciseId: row.exerciseId,

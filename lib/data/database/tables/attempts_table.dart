@@ -6,7 +6,7 @@ import 'exercises_table.dart';
 ///
 /// Stores the user's spoken response, expected answer,
 /// calculated score, and metadata for offline/online tracking.
-@DataClassName('DataAttempt')
+
 class Attempts extends Table {
   IntColumn get id => integer().autoIncrement()();
   IntColumn get sessionId => integer().references(Sessions, #id)();

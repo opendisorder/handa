@@ -1,25 +1,37 @@
 import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/constants/app_constants.dart';
 
-/// Score level badge — visual indicator for the 4-tier grading system.
-///
-/// No red colors. Maps score level to specific gradient + icon + label.
 class ScoreBadge extends StatelessWidget {
-  final String scoreLevel; // 'excellent' | 'good' | 'almost' | 'try_again'
+  final String? scoreLevel;
   final double? scorePercentage;
+  final double? percentage;
   final double size;
 
   const ScoreBadge({
     super.key,
-    required this.scoreLevel,
+    this.scoreLevel,
     this.scorePercentage,
-    this.size = ScoreBadge.defaultSize,
+    this.percentage,
+    this.size = 80,
   });
 
-  static const double defaultSize = 80.0;
+  String get _effectiveLevel {
+    if (scoreLevel != null) return scoreLevel!;
+    final pct = scorePercentage ?? percentage;
+    if (pct != null) {
+      if (pct >= AppConstants.excellentThreshold) return 'excellent';
+      if (pct >= AppConstants.goodThreshold) return 'good';
+      if (pct >= AppConstants.almostThreshold) return 'almost';
+      return 'try_again';
+    }
+    return 'almost';
+  }
+
+  double? get _displayPct => scorePercentage ?? percentage;
 
   Gradient get _gradient {
-    switch (scoreLevel) {
+    switch (_effectiveLevel) {
       case 'excellent': return AppColors.scoreExcellentGradient;
       case 'good': return AppColors.scoreGoodGradient;
       case 'almost': return AppColors.scoreAlmostGradient;
@@ -29,7 +41,7 @@ class ScoreBadge extends StatelessWidget {
   }
 
   IconData get _icon {
-    switch (scoreLevel) {
+    switch (_effectiveLevel) {
       case 'excellent': return Icons.star_rounded;
       case 'good': return Icons.thumb_up_rounded;
       case 'almost': return Icons.trending_up_rounded;
@@ -39,7 +51,7 @@ class ScoreBadge extends StatelessWidget {
   }
 
   String get _label {
-    switch (scoreLevel) {
+    switch (_effectiveLevel) {
       case 'excellent': return 'විශිෂ්ටයි';
       case 'good': return 'හොඳයි';
       case 'almost': return 'බොහෝ දුරට';
@@ -50,8 +62,6 @@ class ScoreBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isLarge = size >= 80;
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -70,9 +80,9 @@ class ScoreBadge extends StatelessWidget {
             ],
           ),
           child: Center(
-            child: scorePercentage != null
+            child: _displayPct != null
                 ? Text(
-                    '${scorePercentage!.toInt()}%',
+                    '${_displayPct!.toInt()}%',
                     style: TextStyle(
                       fontSize: size * 0.3,
                       fontWeight: FontWeight.w700,
@@ -83,7 +93,7 @@ class ScoreBadge extends StatelessWidget {
                 : Icon(_icon, size: size * 0.45, color: Colors.white),
           ),
         ),
-        if (isLarge) ...[
+        if (size >= 80) ...[
           const SizedBox(height: 4),
           Text(
             _label,

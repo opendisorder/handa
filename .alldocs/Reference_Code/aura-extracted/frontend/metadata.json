@@ -1,0 +1,8 @@
+{
+  "name": "AURA Speech Therapy",
+  "description": "Real-time AI-powered speech therapy companion for post-stroke patients.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}

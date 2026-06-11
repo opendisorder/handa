@@ -5,7 +5,7 @@ import 'categories_table.dart';
 ///
 /// Each exercise has a target word in 3 languages plus
 /// a reference image stored locally in WebP format.
-@DataClassName('DataExercise')
+
 class Exercises extends Table {
   IntColumn get id => integer().autoIncrement()();
   IntColumn get categoryId => integer().references(Categories, #id)();

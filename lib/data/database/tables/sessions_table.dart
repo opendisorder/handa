@@ -3,7 +3,7 @@ import 'package:drift/drift.dart';
 /// A therapy session (collection of exercises or conversation).
 ///
 /// Types: 'picture_naming', 'conversation', 'breathing'
-@DataClassName('DataSession')
+
 class Sessions extends Table {
   IntColumn get id => integer().autoIncrement()();
   DateTimeColumn get startedAt => dateTime().withDefault(currentDateAndTime)();

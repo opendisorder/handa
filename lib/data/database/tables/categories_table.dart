@@ -3,7 +3,7 @@ import 'package:drift/drift.dart';
 /// Exercise categories (e.g., Animals, Food, Body Parts, etc.)
 ///
 /// Multilingual: stores names and descriptions in all 3 supported languages.
-@DataClassName('DataCategory')
+
 class Categories extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get nameSi => text()();        // Sinhala name

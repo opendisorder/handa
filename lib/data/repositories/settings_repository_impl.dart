@@ -1,9 +1,8 @@
 import '../../../domain/repositories/settings_repository.dart';
-import '../../database/handa_database.dart';
+import '../database/handa_database.dart' as db;
 
-/// Drift-backed implementation of SettingsRepository.
 class SettingsRepositoryImpl implements SettingsRepository {
-  final HandaDatabase _db;
+  final db.HandaDatabase _db;
 
   SettingsRepositoryImpl(this._db);
 

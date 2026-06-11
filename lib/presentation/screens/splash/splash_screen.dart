@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../router/app_router.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/constants/app_constants.dart';
+import '../../providers/database_provider.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
@@ -43,10 +44,15 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
 
     _controller.forward();
 
-    // Navigate to home after splash delay
-    Future.delayed(const Duration(seconds: 3), () {
+    // Navigate after splash delay — onboarding if first run, else home
+    Future.delayed(const Duration(seconds: 3), () async {
+      if (!mounted) return;
+      final settings = ref.read(settingsRepositoryProvider);
+      final firstRunComplete = await settings.getString('first_run_complete');
       if (mounted) {
-        context.go(AppRoutes.home);
+        context.go(
+          firstRunComplete == 'true' ? AppRoutes.home : AppRoutes.onboarding,
+        );
       }
     });
   }

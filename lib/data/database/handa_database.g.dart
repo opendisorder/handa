@@ -4,7 +4,7 @@ part of 'handa_database.dart';
 
 // ignore_for_file: type=lint
 class $CategoriesTable extends Categories
-    with TableInfo<$CategoriesTable, DataCategory> {
+    with TableInfo<$CategoriesTable, Category> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
@@ -151,7 +151,7 @@ class $CategoriesTable extends Categories
   static const String $name = 'categories';
   @override
   VerificationContext validateIntegrity(
-    Insertable<DataCategory> instance, {
+    Insertable<Category> instance, {
     bool isInserting = false,
   }) {
     final context = VerificationContext();
@@ -248,9 +248,9 @@ class $CategoriesTable extends Categories
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  DataCategory map(Map<String, dynamic> data, {String? tablePrefix}) {
+  Category map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return DataCategory(
+    return Category(
       id:
           attachedDatabase.typeMapping.read(
             DriftSqlType.int,
@@ -315,7 +315,7 @@ class $CategoriesTable extends Categories
   }
 }
 
-class DataCategory extends DataClass implements Insertable<DataCategory> {
+class Category extends DataClass implements Insertable<Category> {
   final int id;
   final String nameSi;
   final String nameTa;
@@ -327,7 +327,7 @@ class DataCategory extends DataClass implements Insertable<DataCategory> {
   final int sortOrder;
   final bool isActive;
   final DateTime createdAt;
-  const DataCategory({
+  const Category({
     required this.id,
     required this.nameSi,
     required this.nameTa,
@@ -373,12 +373,12 @@ class DataCategory extends DataClass implements Insertable<DataCategory> {
     );
   }
 
-  factory DataCategory.fromJson(
+  factory Category.fromJson(
     Map<String, dynamic> json, {
     ValueSerializer? serializer,
   }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return DataCategory(
+    return Category(
       id: serializer.fromJson<int>(json['id']),
       nameSi: serializer.fromJson<String>(json['nameSi']),
       nameTa: serializer.fromJson<String>(json['nameTa']),
@@ -410,7 +410,7 @@ class DataCategory extends DataClass implements Insertable<DataCategory> {
     };
   }
 
-  DataCategory copyWith({
+  Category copyWith({
     int? id,
     String? nameSi,
     String? nameTa,
@@ -422,7 +422,7 @@ class DataCategory extends DataClass implements Insertable<DataCategory> {
     int? sortOrder,
     bool? isActive,
     DateTime? createdAt,
-  }) => DataCategory(
+  }) => Category(
     id: id ?? this.id,
     nameSi: nameSi ?? this.nameSi,
     nameTa: nameTa ?? this.nameTa,
@@ -435,8 +435,8 @@ class DataCategory extends DataClass implements Insertable<DataCategory> {
     isActive: isActive ?? this.isActive,
     createdAt: createdAt ?? this.createdAt,
   );
-  DataCategory copyWithCompanion(CategoriesCompanion data) {
-    return DataCategory(
+  Category copyWithCompanion(CategoriesCompanion data) {
+    return Category(
       id: data.id.present ? data.id.value : this.id,
       nameSi: data.nameSi.present ? data.nameSi.value : this.nameSi,
       nameTa: data.nameTa.present ? data.nameTa.value : this.nameTa,
@@ -462,7 +462,7 @@ class DataCategory extends DataClass implements Insertable<DataCategory> {
 
   @override
   String toString() {
-    return (StringBuffer('DataCategory(')
+    return (StringBuffer('Category(')
           ..write('id: $id, ')
           ..write('nameSi: $nameSi, ')
           ..write('nameTa: $nameTa, ')
@@ -495,7 +495,7 @@ class DataCategory extends DataClass implements Insertable<DataCategory> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is DataCategory &&
+      (other is Category &&
           other.id == this.id &&
           other.nameSi == this.nameSi &&
           other.nameTa == this.nameTa &&
@@ -509,7 +509,7 @@ class DataCategory extends DataClass implements Insertable<DataCategory> {
           other.createdAt == this.createdAt);
 }
 
-class CategoriesCompanion extends UpdateCompanion<DataCategory> {
+class CategoriesCompanion extends UpdateCompanion<Category> {
   final Value<int> id;
   final Value<String> nameSi;
   final Value<String> nameTa;
@@ -553,7 +553,7 @@ class CategoriesCompanion extends UpdateCompanion<DataCategory> {
        descriptionTa = Value(descriptionTa),
        descriptionEn = Value(descriptionEn),
        icon = Value(icon);
-  static Insertable<DataCategory> custom({
+  static Insertable<Category> custom({
     Expression<int>? id,
     Expression<String>? nameSi,
     Expression<String>? nameTa,
@@ -668,7 +668,7 @@ class CategoriesCompanion extends UpdateCompanion<DataCategory> {
 }
 
 class $ExercisesTable extends Exercises
-    with TableInfo<$ExercisesTable, DataExercise> {
+    with TableInfo<$ExercisesTable, Exercise> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
@@ -814,7 +814,7 @@ class $ExercisesTable extends Exercises
   static const String $name = 'exercises';
   @override
   VerificationContext validateIntegrity(
-    Insertable<DataExercise> instance, {
+    Insertable<Exercise> instance, {
     bool isInserting = false,
   }) {
     final context = VerificationContext();
@@ -904,9 +904,9 @@ class $ExercisesTable extends Exercises
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  DataExercise map(Map<String, dynamic> data, {String? tablePrefix}) {
+  Exercise map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return DataExercise(
+    return Exercise(
       id:
           attachedDatabase.typeMapping.read(
             DriftSqlType.int,
@@ -965,7 +965,7 @@ class $ExercisesTable extends Exercises
   }
 }
 
-class DataExercise extends DataClass implements Insertable<DataExercise> {
+class Exercise extends DataClass implements Insertable<Exercise> {
   final int id;
   final int categoryId;
   final String imagePath;
@@ -976,7 +976,7 @@ class DataExercise extends DataClass implements Insertable<DataExercise> {
   final int difficulty;
   final bool isActive;
   final DateTime createdAt;
-  const DataExercise({
+  const Exercise({
     required this.id,
     required this.categoryId,
     required this.imagePath,
@@ -1024,12 +1024,12 @@ class DataExercise extends DataClass implements Insertable<DataExercise> {
     );
   }
 
-  factory DataExercise.fromJson(
+  factory Exercise.fromJson(
     Map<String, dynamic> json, {
     ValueSerializer? serializer,
   }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return DataExercise(
+    return Exercise(
       id: serializer.fromJson<int>(json['id']),
       categoryId: serializer.fromJson<int>(json['categoryId']),
       imagePath: serializer.fromJson<String>(json['imagePath']),
@@ -1059,7 +1059,7 @@ class DataExercise extends DataClass implements Insertable<DataExercise> {
     };
   }
 
-  DataExercise copyWith({
+  Exercise copyWith({
     int? id,
     int? categoryId,
     String? imagePath,
@@ -1070,7 +1070,7 @@ class DataExercise extends DataClass implements Insertable<DataExercise> {
     int? difficulty,
     bool? isActive,
     DateTime? createdAt,
-  }) => DataExercise(
+  }) => Exercise(
     id: id ?? this.id,
     categoryId: categoryId ?? this.categoryId,
     imagePath: imagePath ?? this.imagePath,
@@ -1082,8 +1082,8 @@ class DataExercise extends DataClass implements Insertable<DataExercise> {
     isActive: isActive ?? this.isActive,
     createdAt: createdAt ?? this.createdAt,
   );
-  DataExercise copyWithCompanion(ExercisesCompanion data) {
-    return DataExercise(
+  Exercise copyWithCompanion(ExercisesCompanion data) {
+    return Exercise(
       id: data.id.present ? data.id.value : this.id,
       categoryId:
           data.categoryId.present ? data.categoryId.value : this.categoryId,
@@ -1113,7 +1113,7 @@ class DataExercise extends DataClass implements Insertable<DataExercise> {
 
   @override
   String toString() {
-    return (StringBuffer('DataExercise(')
+    return (StringBuffer('Exercise(')
           ..write('id: $id, ')
           ..write('categoryId: $categoryId, ')
           ..write('imagePath: $imagePath, ')
@@ -1144,7 +1144,7 @@ class DataExercise extends DataClass implements Insertable<DataExercise> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is DataExercise &&
+      (other is Exercise &&
           other.id == this.id &&
           other.categoryId == this.categoryId &&
           other.imagePath == this.imagePath &&
@@ -1157,7 +1157,7 @@ class DataExercise extends DataClass implements Insertable<DataExercise> {
           other.createdAt == this.createdAt);
 }
 
-class ExercisesCompanion extends UpdateCompanion<DataExercise> {
+class ExercisesCompanion extends UpdateCompanion<Exercise> {
   final Value<int> id;
   final Value<int> categoryId;
   final Value<String> imagePath;
@@ -1196,7 +1196,7 @@ class ExercisesCompanion extends UpdateCompanion<DataExercise> {
        targetWordSi = Value(targetWordSi),
        targetWordTa = Value(targetWordTa),
        targetWordEn = Value(targetWordEn);
-  static Insertable<DataExercise> custom({
+  static Insertable<Exercise> custom({
     Expression<int>? id,
     Expression<int>? categoryId,
     Expression<String>? imagePath,
@@ -1302,8 +1302,7 @@ class ExercisesCompanion extends UpdateCompanion<DataExercise> {
   }
 }
 
-class $SessionsTable extends Sessions
-    with TableInfo<$SessionsTable, DataSession> {
+class $SessionsTable extends Sessions with TableInfo<$SessionsTable, Session> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
@@ -1433,7 +1432,7 @@ class $SessionsTable extends Sessions
   static const String $name = 'sessions';
   @override
   VerificationContext validateIntegrity(
-    Insertable<DataSession> instance, {
+    Insertable<Session> instance, {
     bool isInserting = false,
   }) {
     final context = VerificationContext();
@@ -1509,9 +1508,9 @@ class $SessionsTable extends Sessions
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  DataSession map(Map<String, dynamic> data, {String? tablePrefix}) {
+  Session map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return DataSession(
+    return Session(
       id:
           attachedDatabase.typeMapping.read(
             DriftSqlType.int,
@@ -1564,7 +1563,7 @@ class $SessionsTable extends Sessions
   }
 }
 
-class DataSession extends DataClass implements Insertable<DataSession> {
+class Session extends DataClass implements Insertable<Session> {
   final int id;
   final DateTime startedAt;
   final DateTime? completedAt;
@@ -1574,7 +1573,7 @@ class DataSession extends DataClass implements Insertable<DataSession> {
   final double? averageScore;
   final bool isSynced;
   final DateTime createdAt;
-  const DataSession({
+  const Session({
     required this.id,
     required this.startedAt,
     this.completedAt,
@@ -1624,12 +1623,12 @@ class DataSession extends DataClass implements Insertable<DataSession> {
     );
   }
 
-  factory DataSession.fromJson(
+  factory Session.fromJson(
     Map<String, dynamic> json, {
     ValueSerializer? serializer,
   }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return DataSession(
+    return Session(
       id: serializer.fromJson<int>(json['id']),
       startedAt: serializer.fromJson<DateTime>(json['startedAt']),
       completedAt: serializer.fromJson<DateTime?>(json['completedAt']),
@@ -1657,7 +1656,7 @@ class DataSession extends DataClass implements Insertable<DataSession> {
     };
   }
 
-  DataSession copyWith({
+  Session copyWith({
     int? id,
     DateTime? startedAt,
     Value<DateTime?> completedAt = const Value.absent(),
@@ -1667,7 +1666,7 @@ class DataSession extends DataClass implements Insertable<DataSession> {
     Value<double?> averageScore = const Value.absent(),
     bool? isSynced,
     DateTime? createdAt,
-  }) => DataSession(
+  }) => Session(
     id: id ?? this.id,
     startedAt: startedAt ?? this.startedAt,
     completedAt: completedAt.present ? completedAt.value : this.completedAt,
@@ -1678,8 +1677,8 @@ class DataSession extends DataClass implements Insertable<DataSession> {
     isSynced: isSynced ?? this.isSynced,
     createdAt: createdAt ?? this.createdAt,
   );
-  DataSession copyWithCompanion(SessionsCompanion data) {
-    return DataSession(
+  Session copyWithCompanion(SessionsCompanion data) {
+    return Session(
       id: data.id.present ? data.id.value : this.id,
       startedAt: data.startedAt.present ? data.startedAt.value : this.startedAt,
       completedAt:
@@ -1704,7 +1703,7 @@ class DataSession extends DataClass implements Insertable<DataSession> {
 
   @override
   String toString() {
-    return (StringBuffer('DataSession(')
+    return (StringBuffer('Session(')
           ..write('id: $id, ')
           ..write('startedAt: $startedAt, ')
           ..write('completedAt: $completedAt, ')
@@ -1733,7 +1732,7 @@ class DataSession extends DataClass implements Insertable<DataSession> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is DataSession &&
+      (other is Session &&
           other.id == this.id &&
           other.startedAt == this.startedAt &&
           other.completedAt == this.completedAt &&
@@ -1745,7 +1744,7 @@ class DataSession extends DataClass implements Insertable<DataSession> {
           other.createdAt == this.createdAt);
 }
 
-class SessionsCompanion extends UpdateCompanion<DataSession> {
+class SessionsCompanion extends UpdateCompanion<Session> {
   final Value<int> id;
   final Value<DateTime> startedAt;
   final Value<DateTime?> completedAt;
@@ -1777,7 +1776,7 @@ class SessionsCompanion extends UpdateCompanion<DataSession> {
     this.isSynced = const Value.absent(),
     this.createdAt = const Value.absent(),
   }) : type = Value(type);
-  static Insertable<DataSession> custom({
+  static Insertable<Session> custom({
     Expression<int>? id,
     Expression<DateTime>? startedAt,
     Expression<DateTime>? completedAt,
@@ -1875,8 +1874,7 @@ class SessionsCompanion extends UpdateCompanion<DataSession> {
   }
 }
 
-class $AttemptsTable extends Attempts
-    with TableInfo<$AttemptsTable, DataAttempt> {
+class $AttemptsTable extends Attempts with TableInfo<$AttemptsTable, Attempt> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
@@ -2040,7 +2038,7 @@ class $AttemptsTable extends Attempts
   static const String $name = 'attempts';
   @override
   VerificationContext validateIntegrity(
-    Insertable<DataAttempt> instance, {
+    Insertable<Attempt> instance, {
     bool isInserting = false,
   }) {
     final context = VerificationContext();
@@ -2136,9 +2134,9 @@ class $AttemptsTable extends Attempts
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  DataAttempt map(Map<String, dynamic> data, {String? tablePrefix}) {
+  Attempt map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return DataAttempt(
+    return Attempt(
       id:
           attachedDatabase.typeMapping.read(
             DriftSqlType.int,
@@ -2201,7 +2199,7 @@ class $AttemptsTable extends Attempts
   }
 }
 
-class DataAttempt extends DataClass implements Insertable<DataAttempt> {
+class Attempt extends DataClass implements Insertable<Attempt> {
   final int id;
   final int sessionId;
   final int? exerciseId;
@@ -2213,7 +2211,7 @@ class DataAttempt extends DataClass implements Insertable<DataAttempt> {
   final bool isOffline;
   final bool isSynced;
   final DateTime createdAt;
-  const DataAttempt({
+  const Attempt({
     required this.id,
     required this.sessionId,
     this.exerciseId,
@@ -2269,12 +2267,12 @@ class DataAttempt extends DataClass implements Insertable<DataAttempt> {
     );
   }
 
-  factory DataAttempt.fromJson(
+  factory Attempt.fromJson(
     Map<String, dynamic> json, {
     ValueSerializer? serializer,
   }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return DataAttempt(
+    return Attempt(
       id: serializer.fromJson<int>(json['id']),
       sessionId: serializer.fromJson<int>(json['sessionId']),
       exerciseId: serializer.fromJson<int?>(json['exerciseId']),
@@ -2306,7 +2304,7 @@ class DataAttempt extends DataClass implements Insertable<DataAttempt> {
     };
   }
 
-  DataAttempt copyWith({
+  Attempt copyWith({
     int? id,
     int? sessionId,
     Value<int?> exerciseId = const Value.absent(),
@@ -2318,7 +2316,7 @@ class DataAttempt extends DataClass implements Insertable<DataAttempt> {
     bool? isOffline,
     bool? isSynced,
     DateTime? createdAt,
-  }) => DataAttempt(
+  }) => Attempt(
     id: id ?? this.id,
     sessionId: sessionId ?? this.sessionId,
     exerciseId: exerciseId.present ? exerciseId.value : this.exerciseId,
@@ -2332,8 +2330,8 @@ class DataAttempt extends DataClass implements Insertable<DataAttempt> {
     isSynced: isSynced ?? this.isSynced,
     createdAt: createdAt ?? this.createdAt,
   );
-  DataAttempt copyWithCompanion(AttemptsCompanion data) {
-    return DataAttempt(
+  Attempt copyWithCompanion(AttemptsCompanion data) {
+    return Attempt(
       id: data.id.present ? data.id.value : this.id,
       sessionId: data.sessionId.present ? data.sessionId.value : this.sessionId,
       exerciseId:
@@ -2364,7 +2362,7 @@ class DataAttempt extends DataClass implements Insertable<DataAttempt> {
 
   @override
   String toString() {
-    return (StringBuffer('DataAttempt(')
+    return (StringBuffer('Attempt(')
           ..write('id: $id, ')
           ..write('sessionId: $sessionId, ')
           ..write('exerciseId: $exerciseId, ')
@@ -2397,7 +2395,7 @@ class DataAttempt extends DataClass implements Insertable<DataAttempt> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is DataAttempt &&
+      (other is Attempt &&
           other.id == this.id &&
           other.sessionId == this.sessionId &&
           other.exerciseId == this.exerciseId &&
@@ -2411,7 +2409,7 @@ class DataAttempt extends DataClass implements Insertable<DataAttempt> {
           other.createdAt == this.createdAt);
 }
 
-class AttemptsCompanion extends UpdateCompanion<DataAttempt> {
+class AttemptsCompanion extends UpdateCompanion<Attempt> {
   final Value<int> id;
   final Value<int> sessionId;
   final Value<int?> exerciseId;
@@ -2453,7 +2451,7 @@ class AttemptsCompanion extends UpdateCompanion<DataAttempt> {
        expectedAnswer = Value(expectedAnswer),
        scorePercentage = Value(scorePercentage),
        scoreLevel = Value(scoreLevel);
-  static Insertable<DataAttempt> custom({
+  static Insertable<Attempt> custom({
     Expression<int>? id,
     Expression<int>? sessionId,
     Expression<int>? exerciseId,
@@ -2568,7 +2566,7 @@ class AttemptsCompanion extends UpdateCompanion<DataAttempt> {
 }
 
 class $LiveConversationsTable extends LiveConversations
-    with TableInfo<$LiveConversationsTable, DataLiveConversation> {
+    with TableInfo<$LiveConversationsTable, LiveConversation> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
@@ -2699,7 +2697,7 @@ class $LiveConversationsTable extends LiveConversations
   static const String $name = 'live_conversations';
   @override
   VerificationContext validateIntegrity(
-    Insertable<DataLiveConversation> instance, {
+    Insertable<LiveConversation> instance, {
     bool isInserting = false,
   }) {
     final context = VerificationContext();
@@ -2780,9 +2778,9 @@ class $LiveConversationsTable extends LiveConversations
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  DataLiveConversation map(Map<String, dynamic> data, {String? tablePrefix}) {
+  LiveConversation map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return DataLiveConversation(
+    return LiveConversation(
       id:
           attachedDatabase.typeMapping.read(
             DriftSqlType.int,
@@ -2836,8 +2834,8 @@ class $LiveConversationsTable extends LiveConversations
   }
 }
 
-class DataLiveConversation extends DataClass
-    implements Insertable<DataLiveConversation> {
+class LiveConversation extends DataClass
+    implements Insertable<LiveConversation> {
   final int id;
   final int sessionId;
   final String exerciseType;
@@ -2847,7 +2845,7 @@ class DataLiveConversation extends DataClass
   final double? score;
   final bool isSynced;
   final DateTime createdAt;
-  const DataLiveConversation({
+  const LiveConversation({
     required this.id,
     required this.sessionId,
     required this.exerciseType,
@@ -2890,12 +2888,12 @@ class DataLiveConversation extends DataClass
     );
   }
 
-  factory DataLiveConversation.fromJson(
+  factory LiveConversation.fromJson(
     Map<String, dynamic> json, {
     ValueSerializer? serializer,
   }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return DataLiveConversation(
+    return LiveConversation(
       id: serializer.fromJson<int>(json['id']),
       sessionId: serializer.fromJson<int>(json['sessionId']),
       exerciseType: serializer.fromJson<String>(json['exerciseType']),
@@ -2923,7 +2921,7 @@ class DataLiveConversation extends DataClass
     };
   }
 
-  DataLiveConversation copyWith({
+  LiveConversation copyWith({
     int? id,
     int? sessionId,
     String? exerciseType,
@@ -2933,7 +2931,7 @@ class DataLiveConversation extends DataClass
     Value<double?> score = const Value.absent(),
     bool? isSynced,
     DateTime? createdAt,
-  }) => DataLiveConversation(
+  }) => LiveConversation(
     id: id ?? this.id,
     sessionId: sessionId ?? this.sessionId,
     exerciseType: exerciseType ?? this.exerciseType,
@@ -2944,8 +2942,8 @@ class DataLiveConversation extends DataClass
     isSynced: isSynced ?? this.isSynced,
     createdAt: createdAt ?? this.createdAt,
   );
-  DataLiveConversation copyWithCompanion(LiveConversationsCompanion data) {
-    return DataLiveConversation(
+  LiveConversation copyWithCompanion(LiveConversationsCompanion data) {
+    return LiveConversation(
       id: data.id.present ? data.id.value : this.id,
       sessionId: data.sessionId.present ? data.sessionId.value : this.sessionId,
       exerciseType:
@@ -2970,7 +2968,7 @@ class DataLiveConversation extends DataClass
 
   @override
   String toString() {
-    return (StringBuffer('DataLiveConversation(')
+    return (StringBuffer('LiveConversation(')
           ..write('id: $id, ')
           ..write('sessionId: $sessionId, ')
           ..write('exerciseType: $exerciseType, ')
@@ -2999,7 +2997,7 @@ class DataLiveConversation extends DataClass
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is DataLiveConversation &&
+      (other is LiveConversation &&
           other.id == this.id &&
           other.sessionId == this.sessionId &&
           other.exerciseType == this.exerciseType &&
@@ -3011,7 +3009,7 @@ class DataLiveConversation extends DataClass
           other.createdAt == this.createdAt);
 }
 
-class LiveConversationsCompanion extends UpdateCompanion<DataLiveConversation> {
+class LiveConversationsCompanion extends UpdateCompanion<LiveConversation> {
   final Value<int> id;
   final Value<int> sessionId;
   final Value<String> exerciseType;
@@ -3047,7 +3045,7 @@ class LiveConversationsCompanion extends UpdateCompanion<DataLiveConversation> {
        durationSeconds = Value(durationSeconds),
        userTranscript = Value(userTranscript),
        aiFeedback = Value(aiFeedback);
-  static Insertable<DataLiveConversation> custom({
+  static Insertable<LiveConversation> custom({
     Expression<int>? id,
     Expression<int>? sessionId,
     Expression<String>? exerciseType,
@@ -3146,7 +3144,7 @@ class LiveConversationsCompanion extends UpdateCompanion<DataLiveConversation> {
 }
 
 class $AppSettingsTable extends AppSettings
-    with TableInfo<$AppSettingsTable, DataAppSetting> {
+    with TableInfo<$AppSettingsTable, AppSetting> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
@@ -3190,7 +3188,7 @@ class $AppSettingsTable extends AppSettings
   static const String $name = 'app_settings';
   @override
   VerificationContext validateIntegrity(
-    Insertable<DataAppSetting> instance, {
+    Insertable<AppSetting> instance, {
     bool isInserting = false,
   }) {
     final context = VerificationContext();
@@ -3223,9 +3221,9 @@ class $AppSettingsTable extends AppSettings
   @override
   Set<GeneratedColumn> get $primaryKey => {key};
   @override
-  DataAppSetting map(Map<String, dynamic> data, {String? tablePrefix}) {
+  AppSetting map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return DataAppSetting(
+    return AppSetting(
       key:
           attachedDatabase.typeMapping.read(
             DriftSqlType.string,
@@ -3250,11 +3248,11 @@ class $AppSettingsTable extends AppSettings
   }
 }
 
-class DataAppSetting extends DataClass implements Insertable<DataAppSetting> {
+class AppSetting extends DataClass implements Insertable<AppSetting> {
   final String key;
   final String value;
   final DateTime updatedAt;
-  const DataAppSetting({
+  const AppSetting({
     required this.key,
     required this.value,
     required this.updatedAt,
@@ -3276,12 +3274,12 @@ class DataAppSetting extends DataClass implements Insertable<DataAppSetting> {
     );
   }
 
-  factory DataAppSetting.fromJson(
+  factory AppSetting.fromJson(
     Map<String, dynamic> json, {
     ValueSerializer? serializer,
   }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return DataAppSetting(
+    return AppSetting(
       key: serializer.fromJson<String>(json['key']),
       value: serializer.fromJson<String>(json['value']),
       updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
@@ -3297,14 +3295,14 @@ class DataAppSetting extends DataClass implements Insertable<DataAppSetting> {
     };
   }
 
-  DataAppSetting copyWith({String? key, String? value, DateTime? updatedAt}) =>
-      DataAppSetting(
+  AppSetting copyWith({String? key, String? value, DateTime? updatedAt}) =>
+      AppSetting(
         key: key ?? this.key,
         value: value ?? this.value,
         updatedAt: updatedAt ?? this.updatedAt,
       );
-  DataAppSetting copyWithCompanion(AppSettingsCompanion data) {
-    return DataAppSetting(
+  AppSetting copyWithCompanion(AppSettingsCompanion data) {
+    return AppSetting(
       key: data.key.present ? data.key.value : this.key,
       value: data.value.present ? data.value.value : this.value,
       updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
@@ -3313,7 +3311,7 @@ class DataAppSetting extends DataClass implements Insertable<DataAppSetting> {
 
   @override
   String toString() {
-    return (StringBuffer('DataAppSetting(')
+    return (StringBuffer('AppSetting(')
           ..write('key: $key, ')
           ..write('value: $value, ')
           ..write('updatedAt: $updatedAt')
@@ -3326,13 +3324,13 @@ class DataAppSetting extends DataClass implements Insertable<DataAppSetting> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is DataAppSetting &&
+      (other is AppSetting &&
           other.key == this.key &&
           other.value == this.value &&
           other.updatedAt == this.updatedAt);
 }
 
-class AppSettingsCompanion extends UpdateCompanion<DataAppSetting> {
+class AppSettingsCompanion extends UpdateCompanion<AppSetting> {
   final Value<String> key;
   final Value<String> value;
   final Value<DateTime> updatedAt;
@@ -3350,7 +3348,7 @@ class AppSettingsCompanion extends UpdateCompanion<DataAppSetting> {
     this.rowid = const Value.absent(),
   }) : key = Value(key),
        value = Value(value);
-  static Insertable<DataAppSetting> custom({
+  static Insertable<AppSetting> custom({
     Expression<String>? key,
     Expression<String>? value,
     Expression<DateTime>? updatedAt,
@@ -3408,7 +3406,7 @@ class AppSettingsCompanion extends UpdateCompanion<DataAppSetting> {
   }
 }
 
-class $SyncLogTable extends SyncLog with TableInfo<$SyncLogTable, DataSyncLog> {
+class $SyncLogTable extends SyncLog with TableInfo<$SyncLogTable, SyncLogData> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
@@ -3426,12 +3424,12 @@ class $SyncLogTable extends SyncLog with TableInfo<$SyncLogTable, DataSyncLog> {
       'PRIMARY KEY AUTOINCREMENT',
     ),
   );
-  static const VerificationMeta _entityNameMeta = const VerificationMeta(
-    'entityName',
+  static const VerificationMeta _entityTypeMeta = const VerificationMeta(
+    'entityType',
   );
   @override
-  late final GeneratedColumn<String> entityName = GeneratedColumn<String>(
-    'entity_name',
+  late final GeneratedColumn<String> entityType = GeneratedColumn<String>(
+    'entity_type',
     aliasedName,
     false,
     type: DriftSqlType.string,
@@ -3482,7 +3480,7 @@ class $SyncLogTable extends SyncLog with TableInfo<$SyncLogTable, DataSyncLog> {
   @override
   List<GeneratedColumn> get $columns => [
     id,
-    entityName,
+    entityType,
     recordId,
     action,
     syncedAt,
@@ -3495,7 +3493,7 @@ class $SyncLogTable extends SyncLog with TableInfo<$SyncLogTable, DataSyncLog> {
   static const String $name = 'sync_log';
   @override
   VerificationContext validateIntegrity(
-    Insertable<DataSyncLog> instance, {
+    Insertable<SyncLogData> instance, {
     bool isInserting = false,
   }) {
     final context = VerificationContext();
@@ -3503,13 +3501,13 @@ class $SyncLogTable extends SyncLog with TableInfo<$SyncLogTable, DataSyncLog> {
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
-    if (data.containsKey('entity_name')) {
+    if (data.containsKey('entity_type')) {
       context.handle(
-        _entityNameMeta,
-        entityName.isAcceptableOrUnknown(data['entity_name']!, _entityNameMeta),
+        _entityTypeMeta,
+        entityType.isAcceptableOrUnknown(data['entity_type']!, _entityTypeMeta),
       );
     } else if (isInserting) {
-      context.missing(_entityNameMeta);
+      context.missing(_entityTypeMeta);
     }
     if (data.containsKey('record_id')) {
       context.handle(
@@ -3545,18 +3543,18 @@ class $SyncLogTable extends SyncLog with TableInfo<$SyncLogTable, DataSyncLog> {
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  DataSyncLog map(Map<String, dynamic> data, {String? tablePrefix}) {
+  SyncLogData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return DataSyncLog(
+    return SyncLogData(
       id:
           attachedDatabase.typeMapping.read(
             DriftSqlType.int,
             data['${effectivePrefix}id'],
           )!,
-      entityName:
+      entityType:
           attachedDatabase.typeMapping.read(
             DriftSqlType.string,
-            data['${effectivePrefix}entity_name'],
+            data['${effectivePrefix}entity_type'],
           )!,
       recordId:
           attachedDatabase.typeMapping.read(
@@ -3587,16 +3585,16 @@ class $SyncLogTable extends SyncLog with TableInfo<$SyncLogTable, DataSyncLog> {
   }
 }
 
-class DataSyncLog extends DataClass implements Insertable<DataSyncLog> {
+class SyncLogData extends DataClass implements Insertable<SyncLogData> {
   final int id;
-  final String entityName;
+  final String entityType;
   final int recordId;
   final String action;
   final DateTime syncedAt;
   final String status;
-  const DataSyncLog({
+  const SyncLogData({
     required this.id,
-    required this.entityName,
+    required this.entityType,
     required this.recordId,
     required this.action,
     required this.syncedAt,
@@ -3606,7 +3604,7 @@ class DataSyncLog extends DataClass implements Insertable<DataSyncLog> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
-    map['entity_name'] = Variable<String>(entityName);
+    map['entity_type'] = Variable<String>(entityType);
     map['record_id'] = Variable<int>(recordId);
     map['action'] = Variable<String>(action);
     map['synced_at'] = Variable<DateTime>(syncedAt);
@@ -3617,7 +3615,7 @@ class DataSyncLog extends DataClass implements Insertable<DataSyncLog> {
   SyncLogCompanion toCompanion(bool nullToAbsent) {
     return SyncLogCompanion(
       id: Value(id),
-      entityName: Value(entityName),
+      entityType: Value(entityType),
       recordId: Value(recordId),
       action: Value(action),
       syncedAt: Value(syncedAt),
@@ -3625,14 +3623,14 @@ class DataSyncLog extends DataClass implements Insertable<DataSyncLog> {
     );
   }
 
-  factory DataSyncLog.fromJson(
+  factory SyncLogData.fromJson(
     Map<String, dynamic> json, {
     ValueSerializer? serializer,
   }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return DataSyncLog(
+    return SyncLogData(
       id: serializer.fromJson<int>(json['id']),
-      entityName: serializer.fromJson<String>(json['entityName']),
+      entityType: serializer.fromJson<String>(json['entityType']),
       recordId: serializer.fromJson<int>(json['recordId']),
       action: serializer.fromJson<String>(json['action']),
       syncedAt: serializer.fromJson<DateTime>(json['syncedAt']),
@@ -3644,7 +3642,7 @@ class DataSyncLog extends DataClass implements Insertable<DataSyncLog> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
-      'entityName': serializer.toJson<String>(entityName),
+      'entityType': serializer.toJson<String>(entityType),
       'recordId': serializer.toJson<int>(recordId),
       'action': serializer.toJson<String>(action),
       'syncedAt': serializer.toJson<DateTime>(syncedAt),
@@ -3652,26 +3650,26 @@ class DataSyncLog extends DataClass implements Insertable<DataSyncLog> {
     };
   }
 
-  DataSyncLog copyWith({
+  SyncLogData copyWith({
     int? id,
-    String? entityName,
+    String? entityType,
     int? recordId,
     String? action,
     DateTime? syncedAt,
     String? status,
-  }) => DataSyncLog(
+  }) => SyncLogData(
     id: id ?? this.id,
-    entityName: entityName ?? this.entityName,
+    entityType: entityType ?? this.entityType,
     recordId: recordId ?? this.recordId,
     action: action ?? this.action,
     syncedAt: syncedAt ?? this.syncedAt,
     status: status ?? this.status,
   );
-  DataSyncLog copyWithCompanion(SyncLogCompanion data) {
-    return DataSyncLog(
+  SyncLogData copyWithCompanion(SyncLogCompanion data) {
+    return SyncLogData(
       id: data.id.present ? data.id.value : this.id,
-      entityName:
-          data.entityName.present ? data.entityName.value : this.entityName,
+      entityType:
+          data.entityType.present ? data.entityType.value : this.entityType,
       recordId: data.recordId.present ? data.recordId.value : this.recordId,
       action: data.action.present ? data.action.value : this.action,
       syncedAt: data.syncedAt.present ? data.syncedAt.value : this.syncedAt,
@@ -3681,9 +3679,9 @@ class DataSyncLog extends DataClass implements Insertable<DataSyncLog> {
 
   @override
   String toString() {
-    return (StringBuffer('DataSyncLog(')
+    return (StringBuffer('SyncLogData(')
           ..write('id: $id, ')
-          ..write('entityName: $entityName, ')
+          ..write('entityType: $entityType, ')
           ..write('recordId: $recordId, ')
           ..write('action: $action, ')
           ..write('syncedAt: $syncedAt, ')
@@ -3694,29 +3692,29 @@ class DataSyncLog extends DataClass implements Insertable<DataSyncLog> {
 
   @override
   int get hashCode =>
-      Object.hash(id, entityName, recordId, action, syncedAt, status);
+      Object.hash(id, entityType, recordId, action, syncedAt, status);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is DataSyncLog &&
+      (other is SyncLogData &&
           other.id == this.id &&
-          other.entityName == this.entityName &&
+          other.entityType == this.entityType &&
           other.recordId == this.recordId &&
           other.action == this.action &&
           other.syncedAt == this.syncedAt &&
           other.status == this.status);
 }
 
-class SyncLogCompanion extends UpdateCompanion<DataSyncLog> {
+class SyncLogCompanion extends UpdateCompanion<SyncLogData> {
   final Value<int> id;
-  final Value<String> entityName;
+  final Value<String> entityType;
   final Value<int> recordId;
   final Value<String> action;
   final Value<DateTime> syncedAt;
   final Value<String> status;
   const SyncLogCompanion({
     this.id = const Value.absent(),
-    this.entityName = const Value.absent(),
+    this.entityType = const Value.absent(),
     this.recordId = const Value.absent(),
     this.action = const Value.absent(),
     this.syncedAt = const Value.absent(),
@@ -3724,17 +3722,17 @@ class SyncLogCompanion extends UpdateCompanion<DataSyncLog> {
   });
   SyncLogCompanion.insert({
     this.id = const Value.absent(),
-    required String entityName,
+    required String entityType,
     required int recordId,
     required String action,
     this.syncedAt = const Value.absent(),
     this.status = const Value.absent(),
-  }) : entityName = Value(entityName),
+  }) : entityType = Value(entityType),
        recordId = Value(recordId),
        action = Value(action);
-  static Insertable<DataSyncLog> custom({
+  static Insertable<SyncLogData> custom({
     Expression<int>? id,
-    Expression<String>? entityName,
+    Expression<String>? entityType,
     Expression<int>? recordId,
     Expression<String>? action,
     Expression<DateTime>? syncedAt,
@@ -3742,7 +3740,7 @@ class SyncLogCompanion extends UpdateCompanion<DataSyncLog> {
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
-      if (entityName != null) 'entity_name': entityName,
+      if (entityType != null) 'entity_type': entityType,
       if (recordId != null) 'record_id': recordId,
       if (action != null) 'action': action,
       if (syncedAt != null) 'synced_at': syncedAt,
@@ -3752,7 +3750,7 @@ class SyncLogCompanion extends UpdateCompanion<DataSyncLog> {
 
   SyncLogCompanion copyWith({
     Value<int>? id,
-    Value<String>? entityName,
+    Value<String>? entityType,
     Value<int>? recordId,
     Value<String>? action,
     Value<DateTime>? syncedAt,
@@ -3760,7 +3758,7 @@ class SyncLogCompanion extends UpdateCompanion<DataSyncLog> {
   }) {
     return SyncLogCompanion(
       id: id ?? this.id,
-      entityName: entityName ?? this.entityName,
+      entityType: entityType ?? this.entityType,
       recordId: recordId ?? this.recordId,
       action: action ?? this.action,
       syncedAt: syncedAt ?? this.syncedAt,
@@ -3774,8 +3772,8 @@ class SyncLogCompanion extends UpdateCompanion<DataSyncLog> {
     if (id.present) {
       map['id'] = Variable<int>(id.value);
     }
-    if (entityName.present) {
-      map['entity_name'] = Variable<String>(entityName.value);
+    if (entityType.present) {
+      map['entity_type'] = Variable<String>(entityType.value);
     }
     if (recordId.present) {
       map['record_id'] = Variable<int>(recordId.value);
@@ -3796,7 +3794,7 @@ class SyncLogCompanion extends UpdateCompanion<DataSyncLog> {
   String toString() {
     return (StringBuffer('SyncLogCompanion(')
           ..write('id: $id, ')
-          ..write('entityName: $entityName, ')
+          ..write('entityType: $entityType, ')
           ..write('recordId: $recordId, ')
           ..write('action: $action, ')
           ..write('syncedAt: $syncedAt, ')
@@ -3870,10 +3868,10 @@ typedef $$CategoriesTableUpdateCompanionBuilder =
     });
 
 final class $$CategoriesTableReferences
-    extends BaseReferences<_$HandaDatabase, $CategoriesTable, DataCategory> {
+    extends BaseReferences<_$HandaDatabase, $CategoriesTable, Category> {
   $$CategoriesTableReferences(super.$_db, super.$_table, super.$_typedResult);
 
-  static MultiTypedResultKey<$ExercisesTable, List<DataExercise>>
+  static MultiTypedResultKey<$ExercisesTable, List<Exercise>>
   _exercisesRefsTable(_$HandaDatabase db) => MultiTypedResultKey.fromTable(
     db.exercises,
     aliasName: $_aliasNameGenerator(db.categories.id, db.exercises.categoryId),
@@ -4126,14 +4124,14 @@ class $$CategoriesTableTableManager
         RootTableManager<
           _$HandaDatabase,
           $CategoriesTable,
-          DataCategory,
+          Category,
           $$CategoriesTableFilterComposer,
           $$CategoriesTableOrderingComposer,
           $$CategoriesTableAnnotationComposer,
           $$CategoriesTableCreateCompanionBuilder,
           $$CategoriesTableUpdateCompanionBuilder,
-          (DataCategory, $$CategoriesTableReferences),
-          DataCategory,
+          (Category, $$CategoriesTableReferences),
+          Category,
           PrefetchHooks Function({bool exercisesRefs})
         > {
   $$CategoriesTableTableManager(_$HandaDatabase db, $CategoriesTable table)
@@ -4218,9 +4216,9 @@ class $$CategoriesTableTableManager
                 return [
                   if (exercisesRefs)
                     await $_getPrefetchedData<
-                      DataCategory,
+                      Category,
                       $CategoriesTable,
-                      DataExercise
+                      Exercise
                     >(
                       currentTable: table,
                       referencedTable: $$CategoriesTableReferences
@@ -4250,14 +4248,14 @@ typedef $$CategoriesTableProcessedTableManager =
     ProcessedTableManager<
       _$HandaDatabase,
       $CategoriesTable,
-      DataCategory,
+      Category,
       $$CategoriesTableFilterComposer,
       $$CategoriesTableOrderingComposer,
       $$CategoriesTableAnnotationComposer,
       $$CategoriesTableCreateCompanionBuilder,
       $$CategoriesTableUpdateCompanionBuilder,
-      (DataCategory, $$CategoriesTableReferences),
-      DataCategory,
+      (Category, $$CategoriesTableReferences),
+      Category,
       PrefetchHooks Function({bool exercisesRefs})
     >;
 typedef $$ExercisesTableCreateCompanionBuilder =
@@ -4288,7 +4286,7 @@ typedef $$ExercisesTableUpdateCompanionBuilder =
     });
 
 final class $$ExercisesTableReferences
-    extends BaseReferences<_$HandaDatabase, $ExercisesTable, DataExercise> {
+    extends BaseReferences<_$HandaDatabase, $ExercisesTable, Exercise> {
   $$ExercisesTableReferences(super.$_db, super.$_table, super.$_typedResult);
 
   static $CategoriesTable _categoryIdTable(_$HandaDatabase db) =>
@@ -4310,8 +4308,9 @@ final class $$ExercisesTableReferences
     );
   }
 
-  static MultiTypedResultKey<$AttemptsTable, List<DataAttempt>>
-  _attemptsRefsTable(_$HandaDatabase db) => MultiTypedResultKey.fromTable(
+  static MultiTypedResultKey<$AttemptsTable, List<Attempt>> _attemptsRefsTable(
+    _$HandaDatabase db,
+  ) => MultiTypedResultKey.fromTable(
     db.attempts,
     aliasName: $_aliasNameGenerator(db.exercises.id, db.attempts.exerciseId),
   );
@@ -4610,14 +4609,14 @@ class $$ExercisesTableTableManager
         RootTableManager<
           _$HandaDatabase,
           $ExercisesTable,
-          DataExercise,
+          Exercise,
           $$ExercisesTableFilterComposer,
           $$ExercisesTableOrderingComposer,
           $$ExercisesTableAnnotationComposer,
           $$ExercisesTableCreateCompanionBuilder,
           $$ExercisesTableUpdateCompanionBuilder,
-          (DataExercise, $$ExercisesTableReferences),
-          DataExercise,
+          (Exercise, $$ExercisesTableReferences),
+          Exercise,
           PrefetchHooks Function({bool categoryId, bool attemptsRefs})
         > {
   $$ExercisesTableTableManager(_$HandaDatabase db, $ExercisesTable table)
@@ -4729,9 +4728,9 @@ class $$ExercisesTableTableManager
                 return [
                   if (attemptsRefs)
                     await $_getPrefetchedData<
-                      DataExercise,
+                      Exercise,
                       $ExercisesTable,
-                      DataAttempt
+                      Attempt
                     >(
                       currentTable: table,
                       referencedTable: $$ExercisesTableReferences
@@ -4761,14 +4760,14 @@ typedef $$ExercisesTableProcessedTableManager =
     ProcessedTableManager<
       _$HandaDatabase,
       $ExercisesTable,
-      DataExercise,
+      Exercise,
       $$ExercisesTableFilterComposer,
       $$ExercisesTableOrderingComposer,
       $$ExercisesTableAnnotationComposer,
       $$ExercisesTableCreateCompanionBuilder,
       $$ExercisesTableUpdateCompanionBuilder,
-      (DataExercise, $$ExercisesTableReferences),
-      DataExercise,
+      (Exercise, $$ExercisesTableReferences),
+      Exercise,
       PrefetchHooks Function({bool categoryId, bool attemptsRefs})
     >;
 typedef $$SessionsTableCreateCompanionBuilder =
@@ -4797,11 +4796,12 @@ typedef $$SessionsTableUpdateCompanionBuilder =
     });
 
 final class $$SessionsTableReferences
-    extends BaseReferences<_$HandaDatabase, $SessionsTable, DataSession> {
+    extends BaseReferences<_$HandaDatabase, $SessionsTable, Session> {
   $$SessionsTableReferences(super.$_db, super.$_table, super.$_typedResult);
 
-  static MultiTypedResultKey<$AttemptsTable, List<DataAttempt>>
-  _attemptsRefsTable(_$HandaDatabase db) => MultiTypedResultKey.fromTable(
+  static MultiTypedResultKey<$AttemptsTable, List<Attempt>> _attemptsRefsTable(
+    _$HandaDatabase db,
+  ) => MultiTypedResultKey.fromTable(
     db.attempts,
     aliasName: $_aliasNameGenerator(db.sessions.id, db.attempts.sessionId),
   );
@@ -4818,10 +4818,7 @@ final class $$SessionsTableReferences
     );
   }
 
-  static MultiTypedResultKey<
-    $LiveConversationsTable,
-    List<DataLiveConversation>
-  >
+  static MultiTypedResultKey<$LiveConversationsTable, List<LiveConversation>>
   _liveConversationsRefsTable(_$HandaDatabase db) =>
       MultiTypedResultKey.fromTable(
         db.liveConversations,
@@ -5107,14 +5104,14 @@ class $$SessionsTableTableManager
         RootTableManager<
           _$HandaDatabase,
           $SessionsTable,
-          DataSession,
+          Session,
           $$SessionsTableFilterComposer,
           $$SessionsTableOrderingComposer,
           $$SessionsTableAnnotationComposer,
           $$SessionsTableCreateCompanionBuilder,
           $$SessionsTableUpdateCompanionBuilder,
-          (DataSession, $$SessionsTableReferences),
-          DataSession,
+          (Session, $$SessionsTableReferences),
+          Session,
           PrefetchHooks Function({
             bool attemptsRefs,
             bool liveConversationsRefs,
@@ -5199,11 +5196,7 @@ class $$SessionsTableTableManager
               getPrefetchedDataCallback: (items) async {
                 return [
                   if (attemptsRefs)
-                    await $_getPrefetchedData<
-                      DataSession,
-                      $SessionsTable,
-                      DataAttempt
-                    >(
+                    await $_getPrefetchedData<Session, $SessionsTable, Attempt>(
                       currentTable: table,
                       referencedTable: $$SessionsTableReferences
                           ._attemptsRefsTable(db),
@@ -5222,9 +5215,9 @@ class $$SessionsTableTableManager
                     ),
                   if (liveConversationsRefs)
                     await $_getPrefetchedData<
-                      DataSession,
+                      Session,
                       $SessionsTable,
-                      DataLiveConversation
+                      LiveConversation
                     >(
                       currentTable: table,
                       referencedTable: $$SessionsTableReferences
@@ -5254,14 +5247,14 @@ typedef $$SessionsTableProcessedTableManager =
     ProcessedTableManager<
       _$HandaDatabase,
       $SessionsTable,
-      DataSession,
+      Session,
       $$SessionsTableFilterComposer,
       $$SessionsTableOrderingComposer,
       $$SessionsTableAnnotationComposer,
       $$SessionsTableCreateCompanionBuilder,
       $$SessionsTableUpdateCompanionBuilder,
-      (DataSession, $$SessionsTableReferences),
-      DataSession,
+      (Session, $$SessionsTableReferences),
+      Session,
       PrefetchHooks Function({bool attemptsRefs, bool liveConversationsRefs})
     >;
 typedef $$AttemptsTableCreateCompanionBuilder =
@@ -5294,7 +5287,7 @@ typedef $$AttemptsTableUpdateCompanionBuilder =
     });
 
 final class $$AttemptsTableReferences
-    extends BaseReferences<_$HandaDatabase, $AttemptsTable, DataAttempt> {
+    extends BaseReferences<_$HandaDatabase, $AttemptsTable, Attempt> {
   $$AttemptsTableReferences(super.$_db, super.$_table, super.$_typedResult);
 
   static $SessionsTable _sessionIdTable(_$HandaDatabase db) => db.sessions
@@ -5634,14 +5627,14 @@ class $$AttemptsTableTableManager
         RootTableManager<
           _$HandaDatabase,
           $AttemptsTable,
-          DataAttempt,
+          Attempt,
           $$AttemptsTableFilterComposer,
           $$AttemptsTableOrderingComposer,
           $$AttemptsTableAnnotationComposer,
           $$AttemptsTableCreateCompanionBuilder,
           $$AttemptsTableUpdateCompanionBuilder,
-          (DataAttempt, $$AttemptsTableReferences),
-          DataAttempt,
+          (Attempt, $$AttemptsTableReferences),
+          Attempt,
           PrefetchHooks Function({bool sessionId, bool exerciseId})
         > {
   $$AttemptsTableTableManager(_$HandaDatabase db, $AttemptsTable table)
@@ -5780,14 +5773,14 @@ typedef $$AttemptsTableProcessedTableManager =
     ProcessedTableManager<
       _$HandaDatabase,
       $AttemptsTable,
-      DataAttempt,
+      Attempt,
       $$AttemptsTableFilterComposer,
       $$AttemptsTableOrderingComposer,
       $$AttemptsTableAnnotationComposer,
       $$AttemptsTableCreateCompanionBuilder,
       $$AttemptsTableUpdateCompanionBuilder,
-      (DataAttempt, $$AttemptsTableReferences),
-      DataAttempt,
+      (Attempt, $$AttemptsTableReferences),
+      Attempt,
       PrefetchHooks Function({bool sessionId, bool exerciseId})
     >;
 typedef $$LiveConversationsTableCreateCompanionBuilder =
@@ -5820,7 +5813,7 @@ final class $$LiveConversationsTableReferences
         BaseReferences<
           _$HandaDatabase,
           $LiveConversationsTable,
-          DataLiveConversation
+          LiveConversation
         > {
   $$LiveConversationsTableReferences(
     super.$_db,
@@ -6064,14 +6057,14 @@ class $$LiveConversationsTableTableManager
         RootTableManager<
           _$HandaDatabase,
           $LiveConversationsTable,
-          DataLiveConversation,
+          LiveConversation,
           $$LiveConversationsTableFilterComposer,
           $$LiveConversationsTableOrderingComposer,
           $$LiveConversationsTableAnnotationComposer,
           $$LiveConversationsTableCreateCompanionBuilder,
           $$LiveConversationsTableUpdateCompanionBuilder,
-          (DataLiveConversation, $$LiveConversationsTableReferences),
-          DataLiveConversation,
+          (LiveConversation, $$LiveConversationsTableReferences),
+          LiveConversation,
           PrefetchHooks Function({bool sessionId})
         > {
   $$LiveConversationsTableTableManager(
@@ -6199,14 +6192,14 @@ typedef $$LiveConversationsTableProcessedTableManager =
     ProcessedTableManager<
       _$HandaDatabase,
       $LiveConversationsTable,
-      DataLiveConversation,
+      LiveConversation,
       $$LiveConversationsTableFilterComposer,
       $$LiveConversationsTableOrderingComposer,
       $$LiveConversationsTableAnnotationComposer,
       $$LiveConversationsTableCreateCompanionBuilder,
       $$LiveConversationsTableUpdateCompanionBuilder,
-      (DataLiveConversation, $$LiveConversationsTableReferences),
-      DataLiveConversation,
+      (LiveConversation, $$LiveConversationsTableReferences),
+      LiveConversation,
       PrefetchHooks Function({bool sessionId})
     >;
 typedef $$AppSettingsTableCreateCompanionBuilder =
@@ -6298,17 +6291,17 @@ class $$AppSettingsTableTableManager
         RootTableManager<
           _$HandaDatabase,
           $AppSettingsTable,
-          DataAppSetting,
+          AppSetting,
           $$AppSettingsTableFilterComposer,
           $$AppSettingsTableOrderingComposer,
           $$AppSettingsTableAnnotationComposer,
           $$AppSettingsTableCreateCompanionBuilder,
           $$AppSettingsTableUpdateCompanionBuilder,
           (
-            DataAppSetting,
-            BaseReferences<_$HandaDatabase, $AppSettingsTable, DataAppSetting>,
+            AppSetting,
+            BaseReferences<_$HandaDatabase, $AppSettingsTable, AppSetting>,
           ),
-          DataAppSetting,
+          AppSetting,
           PrefetchHooks Function()
         > {
   $$AppSettingsTableTableManager(_$HandaDatabase db, $AppSettingsTable table)
@@ -6366,23 +6359,23 @@ typedef $$AppSettingsTableProcessedTableManager =
     ProcessedTableManager<
       _$HandaDatabase,
       $AppSettingsTable,
-      DataAppSetting,
+      AppSetting,
       $$AppSettingsTableFilterComposer,
       $$AppSettingsTableOrderingComposer,
       $$AppSettingsTableAnnotationComposer,
       $$AppSettingsTableCreateCompanionBuilder,
       $$AppSettingsTableUpdateCompanionBuilder,
       (
-        DataAppSetting,
-        BaseReferences<_$HandaDatabase, $AppSettingsTable, DataAppSetting>,
+        AppSetting,
+        BaseReferences<_$HandaDatabase, $AppSettingsTable, AppSetting>,
       ),
-      DataAppSetting,
+      AppSetting,
       PrefetchHooks Function()
     >;
 typedef $$SyncLogTableCreateCompanionBuilder =
     SyncLogCompanion Function({
       Value<int> id,
-      required String entityName,
+      required String entityType,
       required int recordId,
       required String action,
       Value<DateTime> syncedAt,
@@ -6391,7 +6384,7 @@ typedef $$SyncLogTableCreateCompanionBuilder =
 typedef $$SyncLogTableUpdateCompanionBuilder =
     SyncLogCompanion Function({
       Value<int> id,
-      Value<String> entityName,
+      Value<String> entityType,
       Value<int> recordId,
       Value<String> action,
       Value<DateTime> syncedAt,
@@ -6412,8 +6405,8 @@ class $$SyncLogTableFilterComposer
     builder: (column) => ColumnFilters(column),
   );
 
-  ColumnFilters<String> get entityName => $composableBuilder(
-    column: $table.entityName,
+  ColumnFilters<String> get entityType => $composableBuilder(
+    column: $table.entityType,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -6452,8 +6445,8 @@ class $$SyncLogTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
-  ColumnOrderings<String> get entityName => $composableBuilder(
-    column: $table.entityName,
+  ColumnOrderings<String> get entityType => $composableBuilder(
+    column: $table.entityType,
     builder: (column) => ColumnOrderings(column),
   );
 
@@ -6490,8 +6483,8 @@ class $$SyncLogTableAnnotationComposer
   GeneratedColumn<int> get id =>
       $composableBuilder(column: $table.id, builder: (column) => column);
 
-  GeneratedColumn<String> get entityName => $composableBuilder(
-    column: $table.entityName,
+  GeneratedColumn<String> get entityType => $composableBuilder(
+    column: $table.entityType,
     builder: (column) => column,
   );
 
@@ -6513,17 +6506,17 @@ class $$SyncLogTableTableManager
         RootTableManager<
           _$HandaDatabase,
           $SyncLogTable,
-          DataSyncLog,
+          SyncLogData,
           $$SyncLogTableFilterComposer,
           $$SyncLogTableOrderingComposer,
           $$SyncLogTableAnnotationComposer,
           $$SyncLogTableCreateCompanionBuilder,
           $$SyncLogTableUpdateCompanionBuilder,
           (
-            DataSyncLog,
-            BaseReferences<_$HandaDatabase, $SyncLogTable, DataSyncLog>,
+            SyncLogData,
+            BaseReferences<_$HandaDatabase, $SyncLogTable, SyncLogData>,
           ),
-          DataSyncLog,
+          SyncLogData,
           PrefetchHooks Function()
         > {
   $$SyncLogTableTableManager(_$HandaDatabase db, $SyncLogTable table)
@@ -6540,14 +6533,14 @@ class $$SyncLogTableTableManager
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
-                Value<String> entityName = const Value.absent(),
+                Value<String> entityType = const Value.absent(),
                 Value<int> recordId = const Value.absent(),
                 Value<String> action = const Value.absent(),
                 Value<DateTime> syncedAt = const Value.absent(),
                 Value<String> status = const Value.absent(),
               }) => SyncLogCompanion(
                 id: id,
-                entityName: entityName,
+                entityType: entityType,
                 recordId: recordId,
                 action: action,
                 syncedAt: syncedAt,
@@ -6556,14 +6549,14 @@ class $$SyncLogTableTableManager
           createCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
-                required String entityName,
+                required String entityType,
                 required int recordId,
                 required String action,
                 Value<DateTime> syncedAt = const Value.absent(),
                 Value<String> status = const Value.absent(),
               }) => SyncLogCompanion.insert(
                 id: id,
-                entityName: entityName,
+                entityType: entityType,
                 recordId: recordId,
                 action: action,
                 syncedAt: syncedAt,
@@ -6588,17 +6581,17 @@ typedef $$SyncLogTableProcessedTableManager =
     ProcessedTableManager<
       _$HandaDatabase,
       $SyncLogTable,
-      DataSyncLog,
+      SyncLogData,
       $$SyncLogTableFilterComposer,
       $$SyncLogTableOrderingComposer,
       $$SyncLogTableAnnotationComposer,
       $$SyncLogTableCreateCompanionBuilder,
       $$SyncLogTableUpdateCompanionBuilder,
       (
-        DataSyncLog,
-        BaseReferences<_$HandaDatabase, $SyncLogTable, DataSyncLog>,
+        SyncLogData,
+        BaseReferences<_$HandaDatabase, $SyncLogTable, SyncLogData>,
       ),
-      DataSyncLog,
+      SyncLogData,
       PrefetchHooks Function()
     >;
 

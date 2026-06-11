@@ -2,7 +2,7 @@ import 'package:drift/drift.dart';
 import 'sessions_table.dart';
 
 /// Records from Gemini Live conversation exercises.
-@DataClassName('DataLiveConversation')
+
 class LiveConversations extends Table {
   IntColumn get id => integer().autoIncrement()();
   IntColumn get sessionId => integer().references(Sessions, #id)();

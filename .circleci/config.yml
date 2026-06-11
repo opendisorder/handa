@@ -1,51 +1,39 @@
 version: 2.1
 
+orbs:
+  android: circleci/android@2.5.0
+
 jobs:
   build-apk:
-    docker:
-      - image: cimg/base:stable
+    executor:
+      name: android/android-machine
+      resource-class: medium
     steps:
+      - checkout
+
       - run:
-          name: Full Build
+          name: Install Flutter
           command: |
-            set -ex
-
-            # Install git + curl
-            sudo apt-get update -qq
-            sudo apt-get install -y -qq git curl xz-utils openjdk-17-jdk
-
-            # Clone repo
-            git clone https://github.com/opendisorder/handa.git /home/circleci/handa
-            cd /home/circleci/handa
-
-            # Install Android SDK
-            export ANDROID_HOME=/home/circleci/android-sdk
-            export ANDROID_SDK_ROOT=$ANDROID_HOME
-            export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
-
-            mkdir -p $ANDROID_HOME/cmdline-tools
-            curl -sSL https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -o cmdline-tools.zip
-            unzip -q cmdline-tools.zip -d $ANDROID_HOME/cmdline-tools
-            mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
-            rm cmdline-tools.zip
-
-            $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_HOME "platform-tools" "platforms;android-34" "build-tools;34.0.0" --list 2>&1 | head -5
-            yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_HOME --licenses > /dev/null 2>&1 || true
-
-            # Install Flutter
-            curl -sSLO https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.29.2-stable.tar.xz
-            tar xf flutter_linux_3.29.2-stable.tar.xz -C /home/circleci/
-            rm flutter_linux_3.29.2-stable.tar.xz
-            export PATH="$PATH:/home/circleci/flutter/bin:/home/circleci/flutter/bin/cache/dart-sdk/bin"
+            curl -sSLO https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.44.1-stable.tar.xz
+            tar xf flutter_linux_3.44.1-stable.tar.xz -C /home/circleci/
+            rm flutter_linux_3.44.1-stable.tar.xz
+            echo 'export PATH="$PATH:/home/circleci/flutter/bin:/home/circleci/flutter/bin/cache/dart-sdk/bin"' >> $BASH_ENV
             flutter config --no-analytics
 
-            # Build
-            flutter pub get
-            dart run build_runner build --delete-conflicting-outputs || true
-            flutter build apk --debug --target-platform android-arm64
+      - run:
+          name: Install dependencies
+          command: flutter pub get
+
+      - run:
+          name: Generate Drift code
+          command: dart run build_runner build --delete-conflicting-outputs
+
+      - run:
+          name: Build debug APK
+          command: flutter build apk --debug --target-platform android-arm64
 
       - store_artifacts:
-          path: /home/circleci/handa/build/app/outputs/flutter-apk/
+          path: build/app/outputs/flutter-apk/
           destination: handa-apk
 
 workflows:

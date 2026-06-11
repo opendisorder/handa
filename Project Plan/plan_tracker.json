@@ -1,0 +1,340 @@
+{
+  "project_name": "Handa (AURA) Speech Therapy",
+  "knowledge_base": {
+    "alldocs_path": "/home/jay/Workspace/Therapy/.alldocs",
+    "knowledge_path": "/home/jay/Workspace/Therapy/.knowledge",
+    "project_skills_path": "/home/jay/Workspace/Therapy/project_skills",
+    "essential_guides": [
+      {
+        "name": "Psychology and Framework",
+        "path": "/home/jay/Workspace/Therapy/.knowledge/01_Psychology_and_Framework/"
+      },
+      {
+        "name": "Architecture and UI",
+        "path": "/home/jay/Workspace/Therapy/.knowledge/02_Architecture_and_UI/"
+      },
+      {
+        "name": "AI and Integration",
+        "path": "/home/jay/Workspace/Therapy/.knowledge/04_AI_and_Integration/"
+      }
+    ]
+  },
+  "phases": [
+    {
+      "id": "phase_0",
+      "name": "Project Plan Scaffold",
+      "description": "Create the 15-phase directory structure and initial roadmap files.",
+      "file_path": "/home/jay/Workspace/Therapy/Project Plan/README.md",
+      "status": "completed",
+      "checklist": [
+        {"item": "Create 15-phase directory structure", "completed": true},
+        {"item": "Create README.md hub", "completed": true},
+        {"item": "Create MAIN-CHECKLIST.md", "completed": true},
+        {"item": "Create PROGRESS-DASHBOARD.md", "completed": true},
+        {"item": "Create DECISIONS.md", "completed": true},
+        {"item": "Create RISKS.md", "completed": true},
+        {"item": "Create CHANGELOG.md", "completed": true},
+        {"item": "Create GLOSSARY.md", "completed": true},
+        {"item": "Create COMPLETION-CONTRACT.md", "completed": true},
+        {"item": "Create CUT-LIST.md", "completed": true}
+      ]
+    },
+    {
+      "id": "phase_1",
+      "name": "Intent Discovery",
+      "description": "Deeply understand the psychological drivers and clinical needs of the patient.",
+      "file_path": "/home/jay/Workspace/Therapy/.alldocs/Planning_Phases/intent-report.md",
+      "status": "completed",
+      "checklist": [
+        {"item": "Answer 7 questions", "completed": true},
+        {"item": "Document intent in docs/intent-report.md", "completed": true},
+        {"item": "Confirm project name and direction", "completed": true}
+      ]
+    },
+    {
+      "id": "phase_2",
+      "name": "Gap Analysis",
+      "description": "Identify missing infrastructure, authentication APIs, and storage setups.",
+      "file_path": "/home/jay/Workspace/Therapy/.alldocs/Planning_Phases/gap-analysis-report.md",
+      "status": "completed",
+      "checklist": [
+        {"item": "Check geography, auth, payment, data storage", "completed": true},
+        {"item": "Document gaps in docs/gap-analysis-report.md", "completed": true}
+      ]
+    },
+    {
+      "id": "phase_3",
+      "name": "Contradiction Detection",
+      "description": "Detect logical conflicts or design gaps in the product specs.",
+      "file_path": "/home/jay/Workspace/Therapy/.alldocs/Planning_Phases/conflict-report.md",
+      "status": "completed",
+      "checklist": [
+        {"item": "Check for logical impossibilities", "completed": true},
+        {"item": "Document in docs/conflict-report.md", "completed": true}
+      ]
+    },
+    {
+      "id": "phase_4",
+      "name": "Research",
+      "description": "Ingest Digital Brain Clone Architecture and map integration boundaries.",
+      "file_path": "/home/jay/Workspace/Therapy/.alldocs/Planning_Phases/research-report.md",
+      "status": "completed",
+      "checklist": [
+        {"item": "Ingest Digital Brain Clone Architecture into .alldocs", "completed": true},
+        {"item": "Cross-reference against existing plan", "completed": true},
+        {"item": "Document research findings — 13 new modules identified", "completed": true},
+        {"item": "5 integration points with existing services mapped", "completed": true}
+      ]
+    },
+    {
+      "id": "phase_5",
+      "name": "Requirements",
+      "description": "Formulate functional and non-functional requirements for the Digital Brain.",
+      "file_path": "/home/jay/Workspace/Therapy/.alldocs/Planning_Phases/requirements-document.md",
+      "status": "completed",
+      "checklist": [
+        {"item": "Write Functional Requirements (10 FRs)", "completed": true},
+        {"item": "Write Non-Functional Requirements (5 NFRs)", "completed": true}
+      ]
+    },
+    {
+      "id": "phase_6",
+      "name": "Product Definition",
+      "description": "Define patient personas, key performance indicators (KPIs), and user journeys.",
+      "file_path": "/home/jay/Workspace/Therapy/.alldocs/Planning_Phases/product-definition.md",
+      "status": "completed",
+      "checklist": [
+        {"item": "Vision statement drafted", "completed": true},
+        {"item": "Mission statement drafted", "completed": true},
+        {"item": "Complete personas, KPIs, user journeys", "completed": true}
+      ]
+    },
+    {
+      "id": "phase_7",
+      "name": "UX Planning",
+      "description": "Map out user flows, wireframes, and interface hierarchies.",
+      "file_path": "/home/jay/Workspace/Therapy/.alldocs/Planning_Phases/ux-plan.md",
+      "status": "completed",
+      "checklist": [
+        {"item": "User flows, wireframes, info architecture", "completed": true}
+      ]
+    },
+    {
+      "id": "phase_8",
+      "name": "Architecture",
+      "description": "Design the system architecture merging the frontend and background agent.",
+      "file_path": "/home/jay/Workspace/Therapy/.alldocs/Planning_Phases/architecture-document.md",
+      "status": "completed",
+      "checklist": [
+        {"item": "Original architecture docs (8 files in lib/)", "completed": true},
+        {"item": "Merged Digital Brain architecture: 13 modules across 5 layers", "completed": true},
+        {"item": "Firestore schema designed for all brain data", "completed": true},
+        {"item": "7-step background agent protocol integrated", "completed": true}
+      ]
+    },
+    {
+      "id": "phase_9",
+      "name": "Device Analysis",
+      "description": "Identify target device constraints, OS versions, and screen resolutions.",
+      "file_path": "/home/jay/Workspace/Therapy/.alldocs/Planning_Phases/device-analysis.md",
+      "status": "completed",
+      "checklist": [
+        {"item": "Device matrix, constraints", "completed": true}
+      ]
+    },
+    {
+      "id": "phase_10",
+      "name": "Dependency Mapping",
+      "description": "Map relationships and import pathways between code components.",
+      "file_path": "/home/jay/Workspace/Therapy/.alldocs/Planning_Phases/dependency-map.md",
+      "status": "completed",
+      "checklist": [
+        {"item": "Create 6-layer dependency tree (M0-M14)", "completed": true},
+        {"item": "No circular dependencies confirmed", "completed": true},
+        {"item": "All 5 integration points with existing services mapped", "completed": true}
+      ]
+    },
+    {
+      "id": "phase_11",
+      "name": "Priority Matrix",
+      "description": "Categorize features using MoSCoW parameters to schedule active milestones.",
+      "file_path": "/home/jay/Workspace/Therapy/.alldocs/Planning_Phases/priority-matrix.md",
+      "status": "completed",
+      "checklist": [
+        {"item": "MoSCoW categorization", "completed": true}
+      ]
+    },
+    {
+      "id": "phase_12",
+      "name": "Implementation Roadmap",
+      "description": "Schedule time-bound development sprints and milestones.",
+      "file_path": "/home/jay/Workspace/Therapy/.alldocs/Planning_Phases/implementation-roadmap.md",
+      "status": "completed",
+      "checklist": [
+        {"item": "Original 5-phase delivery plan exists", "completed": true},
+        {"item": "Convert to time-bound milestones", "completed": true}
+      ]
+    },
+    {
+      "id": "phase_13",
+      "name": "Progress Tracker",
+      "description": "Maintain active dashboard of sprints and implementation progress.",
+      "file_path": "/home/jay/Workspace/Therapy/.alldocs/Planning_Phases/progress-tracker.md",
+      "status": "completed",
+      "checklist": [
+        {"item": "PROGRESS-DASHBOARD.md created", "completed": true},
+        {"item": "Update tracker continuously", "completed": true}
+      ]
+    },
+    {
+      "id": "phase_14",
+      "name": "Validation Gate",
+      "description": "Audit the project plan and codebase prior to production deployments.",
+      "file_path": "/home/jay/Workspace/Therapy/.alldocs/Planning_Phases/validation-gate-report.md",
+      "status": "completed",
+      "checklist": [
+        {"item": "12-document checklist audit", "completed": true}
+      ]
+    },
+    {
+      "id": "phase_15",
+      "name": "Coding Order",
+      "description": "Sequence implementation steps for all 15 Digital Brain modules.",
+      "file_path": "/home/jay/Workspace/Therapy/.alldocs/Planning_Phases/coding-order.md",
+      "status": "completed",
+      "checklist": [
+        {"item": "6 batches sequenced by dependency tree", "completed": true},
+        {"item": "Foundation models parallelizable", "completed": true},
+        {"item": "Week-by-week implementation sequence mapped", "completed": true}
+      ]
+    }
+  ],
+  "compaction_log": [
+    {
+      "compaction_number": 1,
+      "timestamp": "2026-06-10T09:23:46Z",
+      "summary_ref": "Resuming from a compaction summary inside conversation transcript",
+      "notes": "Standardized uppercase .Alldocs/Knowledge folders to lowercase .alldocs/.knowledge. Restructured all documentation files. Fixed layout constraints in onboarding and settings. Installed graphifyy."
+    }
+  ],
+  "lifecycle_transition": {
+    "from": "PLANNING",
+    "to": "ACTIVE",
+    "timestamp": "2026-06-10T10:00:00+05:30",
+    "completed_phases": 15,
+    "validation_gate": "PASSED"
+  },
+  "implementation_tracking": {
+    "batches": [
+      {
+        "id": "batch_1",
+        "name": "Foundation Domain Models",
+        "modules": ["M0", "M1", "M2", "M3", "M4"],
+        "status": "completed",
+        "files": [
+          "lib/domain/models/memory/brain_region.dart",
+          "lib/domain/models/memory/relationship_graph.dart",
+          "lib/domain/models/memory/entity_graph.dart",
+          "lib/domain/models/memory/word_mastery.dart",
+          "lib/domain/models/memory/therapeutic_state.dart",
+          "lib/domain/models/memory/session_log.dart",
+          "lib/domain/models/memory/pattern_repo.dart"
+        ]
+      },
+      {
+        "id": "batch_2",
+        "name": "Storage Layer (Stores)",
+        "modules": ["M5", "M6", "M7", "M8"],
+        "status": "completed",
+        "files": [
+          "lib/data/memory/brain_region_store.dart",
+          "lib/data/memory/relationship_store.dart",
+          "lib/data/memory/entity_store.dart",
+          "lib/data/memory/word_mastery_store.dart",
+          "lib/data/memory/therapeutic_state_store.dart",
+          "lib/data/memory/session_log_store.dart",
+          "lib/data/memory/pattern_repository_store.dart"
+        ]
+      },
+      {
+        "id": "batch_3",
+        "name": "Background Agent Updaters",
+        "modules": ["M9", "M10", "M11"],
+        "status": "completed",
+        "files": [
+          "lib/data/background_agent/brain_region_updater.dart",
+          "lib/data/background_agent/relationship_updater.dart",
+          "lib/data/background_agent/entity_updater.dart"
+        ]
+      },
+      {
+        "id": "batch_4",
+        "name": "Memory Injection Builder",
+        "modules": ["M12"],
+        "status": "completed",
+        "files": [
+          "lib/data/memory/memory_injection_builder.dart"
+        ]
+      },
+      {
+        "id": "batch_5",
+        "name": "Background Agent Orchestrator",
+        "modules": ["M13"],
+        "status": "completed",
+        "files": [
+          "lib/data/services/background_agent_orchestrator.dart",
+          "lib/data/services/digital_brain_service.dart"
+        ]
+      },
+      {
+        "id": "batch_6",
+        "name": "Prompt Pipeline Integration",
+        "modules": ["M14"],
+        "status": "completed",
+        "files": [
+          "lib/presentation/providers/digital_brain_providers.dart",
+          "lib/presentation/screens/session/session_screen.dart (updated)",
+          "lib/presentation/screens/conversation/conversation_screen.dart (updated)",
+          "lib/presentation/screens/exercise/exercise_screen.dart (updated)"
+        ]
+      },
+      {
+        "id": "batch_7",
+        "name": "Tool Call Handler Integration",
+        "modules": ["M15"],
+        "status": "completed",
+        "files": [
+          "lib/data/services/tool_call_handler_service.dart",
+          "lib/data/services/function_declarations.dart",
+          "lib/data/services/live_api_service.dart (tools parameter added)",
+          "lib/presentation/screens/exercise/exercise_screen.dart (tool handling)",
+          "lib/presentation/screens/session/session_screen.dart (tool handling)",
+          "lib/presentation/screens/conversation/conversation_screen.dart (tool handling)"
+        ]
+      },
+      {
+        "id": "batch_8",
+        "name": "Content Library + Scoring + Cueing Ladder + Struggle Detection + Caregiver Report",
+        "modules": ["P0/P1 Features"],
+        "status": "completed",
+        "files": [
+          "lib/domain/models/exercise_content.dart (12 categories, 100+ items with imageUrl)",
+          "lib/domain/services/scoring_engine.dart (offline Levenshtein fallback)",
+          "lib/domain/services/cueing_ladder_service.dart (4-level progressive hints)",
+          "lib/domain/services/struggle_detection_service.dart (behavioral signal analysis)",
+          "lib/data/services/caregiver_report_service.dart (weekly PDF report)",
+          "lib/presentation/screens/exercise/exercise_screen.dart (cueing ladder integration)",
+          "lib/presentation/screens/session/session_screen.dart (cueing ladder + struggle detection)",
+          "lib/presentation/screens/caregiver/caregiver_dashboard_screen.dart (weekly report button)",
+          "lib/presentation/providers/digital_brain_providers.dart (caregiverReportServiceProvider)"
+        ]
+      }
+    ],
+      "remaining_work": []
+  },
+  "ai_comment_area": {
+    "last_comment_by": "OpenCode fullstack-developer",
+    "timestamp": "2026-06-10T18:30:00+05:30",
+    "content": "Batch 8 complete: Exercise content library (12 categories, 100+ items with imageUrl), offline fallback scoring via ScoringEngine + LevenshteinDistance, CueingLadderService (4-level L0-L3), StruggleDetectionService (behavioral signals, no MediaPipe), CaregiverReportService (weekly PDF with share). All wired into session_screen, exercise_screen, caregiver_dashboard_screen. flutter analyze: 0 errors. All P0/P1 features implemented."
+  }
+}

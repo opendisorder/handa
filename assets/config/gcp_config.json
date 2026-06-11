@@ -1,0 +1,27 @@
+{
+  "project_id": "biz-studio-1779528000",
+  "location": "us-central1",
+  "api_endpoint": "us-central1-aiplatform.googleapis.com",
+  "auth_method": "ADC",
+  "adc_credentials_path": "~/.config/gcloud/application_default_credentials.json",
+  "models": {
+    "gemini_live": {
+      "model": "gemini-2.5-flash",
+      "endpoint": "wss://us-central1-aiplatform.googleapis.com/ws/google.cloud.aiplatform.v1beta1.LlmBidiService/BidiGenerateContent",
+      "auth": "OAuth2 (ADC access token)"
+    },
+    "background_agent": {
+      "model": "gemini-2.5-flash",
+      "endpoint": "https://us-central1-aiplatform.googleapis.com/v1/projects/biz-studio-1779528000/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent",
+      "auth": "OAuth2 (ADC access token)"
+    }
+  },
+  "api_key": {
+    "value": "REDACTED",
+    "status": "BLOCKED",
+    "reason": "API_KEY_SERVICE_BLOCKED for generativelanguage.googleapis.com",
+    "note": "Use ADC instead for Vertex AI access"
+  },
+  "verified_at": "2026-06-09T20:40:00Z",
+  "verified_by": "ADC setup script + curl test"
+}

@@ -10,6 +10,8 @@ import '../screens/conversation/conversation_screen.dart';
 import '../screens/breathing/breathing_screen.dart';
 import '../screens/dashboard/dashboard_screen.dart';
 import '../screens/settings/settings_screen.dart';
+import '../screens/onboarding/onboarding_screen.dart';
+import '../screens/caregiver/caregiver_dashboard_screen.dart';
 
 /// Route path constants
 class AppRoutes {
@@ -24,6 +26,8 @@ class AppRoutes {
   static const breathing = '/breathing';
   static const dashboard = '/dashboard';
   static const settings = '/settings';
+  static const onboarding = '/onboarding';
+  static const caregiverDashboard = '/caregiver-dashboard';
 }
 
 final appRouterProvider = Provider<GoRouter>((ref) {
@@ -76,6 +80,16 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: AppRoutes.settings,
         name: 'settings',
         builder: (context, state) => const SettingsScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.onboarding,
+        name: 'onboarding',
+        builder: (context, state) => const OnboardingScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.caregiverDashboard,
+        name: 'caregiverDashboard',
+        builder: (context, state) => const CaregiverDashboardScreen(),
       ),
     ],
 

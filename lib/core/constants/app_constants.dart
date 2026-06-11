@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 /// App-wide constants for Handa (හඬ)
 class AppConstants {
   AppConstants._();
@@ -83,12 +81,21 @@ class AppConstants {
   static const int sampleRate = 44100;
   static const int audioBitRate = 128000;
 
-  // ─── API ────────────────────────────────────────────────────
+  // ─── Vertex AI (Live API - OAuth2 Bearer Token) ─────────────
+  static const String gcpProjectId = 'biz-studio-1779528000';
+  static const String gcpLocation = 'us-central1';
+  static const String liveApiModel = 'gemini-live-2.5-flash-native-audio';
+  static const String scoringModel = 'gemini-3.1-flash-lite-preview';
+
+  // ─── Gemini REST API (Legacy - being migrated to Vertex AI) ─
   static const Duration apiTimeout = Duration(seconds: 30);
   static const int maxRetries = 3;
   static const Duration retryDelay = Duration(seconds: 2);
-  static const String cloudflareWorkerUrl =
-      'https://handa-api.your-worker.workers.dev';
+  static const String geminiApiKey =
+      'AIzaSyAoFNLv00RmHoJOmtzrQgIoEash3-CaEdI';
+  static const String geminiApiBaseUrl =
+      'https://generativelanguage.googleapis.com/v1beta';
+  static const String geminiModel = 'gemini-2.5-flash-001';
 
   // ─── Database ──────────────────────────────────────────────
   static const String dbName = 'handa.db';

@@ -4,15 +4,12 @@ import '../../../domain/models/exercise.dart';
 import '../../../domain/repositories/exercise_repository.dart';
 import '../../../domain/models/attempt.dart';
 import '../../../domain/models/session.dart';
-import '../../database/handa_database.dart';
+import '../database/handa_database.dart' as db;
 
-/// Drift-backed implementation of ExerciseRepository.
 class ExerciseRepositoryImpl implements ExerciseRepository {
-  final HandaDatabase _db;
+  final db.HandaDatabase _db;
 
   ExerciseRepositoryImpl(this._db);
-
-  // ─── Categories ────────────────────────────────────────────
 
   @override
   Future<List<Category>> getCategories() async {
@@ -26,8 +23,6 @@ class ExerciseRepositoryImpl implements ExerciseRepository {
     return row != null ? _toCategory(row) : null;
   }
 
-  // ─── Exercises ─────────────────────────────────────────────
-
   @override
   Future<List<Exercise>> getExercises({int? categoryId}) async {
     final rows = await _db.exerciseDao.getAllActive(categoryId: categoryId);
@@ -40,11 +35,9 @@ class ExerciseRepositoryImpl implements ExerciseRepository {
     return row != null ? _toExercise(row) : null;
   }
 
-  // ─── Attempts ──────────────────────────────────────────────
-
   @override
   Future<int> saveAttempt(Attempt attempt) async {
-    final companion = AttemptsCompanion(
+    final companion = db.AttemptsCompanion(
       sessionId: Value(attempt.sessionId),
       exerciseId: Value(attempt.exerciseId),
       userResponse: Value(attempt.userResponse),
@@ -57,11 +50,9 @@ class ExerciseRepositoryImpl implements ExerciseRepository {
     return await _db.attemptDao.insert(companion);
   }
 
-  // ─── Sessions ──────────────────────────────────────────────
-
   @override
   Future<int> createSession(Session session) async {
-    final companion = SessionsCompanion(
+    final companion = db.SessionsCompanion(
       type: Value(session.type),
       totalExercises: Value(session.totalExercises),
     );
@@ -90,9 +81,7 @@ class ExerciseRepositoryImpl implements ExerciseRepository {
     return rows.map(_toSession).toList();
   }
 
-  // ─── Mappers ───────────────────────────────────────────────
-
-  Category _toCategory(DataCategory row) => Category(
+  Category _toCategory(db.Category row) => Category(
         id: row.id,
         nameSi: row.nameSi,
         nameTa: row.nameTa,
@@ -105,7 +94,7 @@ class ExerciseRepositoryImpl implements ExerciseRepository {
         isActive: row.isActive,
       );
 
-  Exercise _toExercise(DataExercise row) => Exercise(
+  Exercise _toExercise(db.Exercise row) => Exercise(
         id: row.id,
         categoryId: row.categoryId,
         imagePath: row.imagePath,
@@ -117,7 +106,7 @@ class ExerciseRepositoryImpl implements ExerciseRepository {
         isActive: row.isActive,
       );
 
-  Session _toSession(DataSession row) => Session(
+  Session _toSession(db.Session row) => Session(
         id: row.id,
         startedAt: row.startedAt,
         completedAt: row.completedAt,
